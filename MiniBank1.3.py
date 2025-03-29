@@ -213,6 +213,7 @@ def main():
     bank = BankSystem()
     bank.create_user("admin", "123")
     bank.create_user("user1", "123")
+    bank.create_user("user2", "123")
 
     while True:
         if not display_home_page():
