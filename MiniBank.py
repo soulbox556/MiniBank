@@ -2,6 +2,7 @@
 # v1.1 with some specifications
 # v.1.2 hide passwords
 # v.1.3 authomatic acount number example
+# v.1.4 Eshte finalizuar fajli dhe tani do te punohet permes github : EI MA
 
 import hashlib
 import pwinput
