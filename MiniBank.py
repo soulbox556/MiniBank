@@ -1,22 +1,33 @@
+# v1 first code
+# v1.1 with some specifications
+# v.1.2 hide passwords
+# v.1.3 authomatic acount number example
+
+import hashlib
+import pwinput
+from datetime import datetime
+
+
 class BankAccount:
     def __init__(self, account_number, account_name, balance=0):
         self.account_number = account_number
         self.account_name = account_name
         self.balance = balance
-# €€€€€€
+        self.transaction_counter = 10000
+
     def deposit(self, amount):
         self.balance += amount
-        print(f"Deposited €{amount}. New balance is €{self.balance}.")
+        print(f"Deposited €{amount:.2f}. New balance is €{self.balance:.2f}.")
 
     def withdraw(self, amount):
         if amount > self.balance:
             print("Insufficient funds.")
         else:
             self.balance -= amount
-            print(f"Withdrew €{amount}. New balance is €{self.balance}.")
+            print(f"Withdrew €{amount:.2f}. New balance is €{self.balance:.2f}.")
 
     def check_balance(self):
-        print(f"Current balance is €{self.balance}.")
+        print(f"Current balance is €{self.balance:.2f}.")
 
     def transfer(self, amount, recipient_account):
         if amount > self.balance:
@@ -25,160 +36,194 @@ class BankAccount:
             self.balance -= amount
             recipient_account.balance += amount
             print(
-                f"Transferred €{amount} to account {recipient_account.account_number}. New balance is €{self.balance}.")
+                f"Transferred €{amount:.2f} to account {recipient_account.account_number}. New balance is €{self.balance:.2f}.")
 
 
 class BankSystem:
     def __init__(self):
         self.accounts = {}
         self.users = {}
+        self.user_accounts = {}
+        self.account_counter = 10000
 
-    def create_account(self, account_number, account_name, initial_balance=0):
-        if account_number in self.accounts:
-            print("Account number already exists.")
-        else:
-            new_account = BankAccount(
-                account_number, account_name, initial_balance)
-            self.accounts[account_number] = new_account
-            print(f"Account {account_number} created for {account_name}.")
+    def _generate_account_number(self, account_name, initial_balance):
+        cc = "05"
+        name_part = account_name.upper().replace(" ", "_")[:20].ljust(20, "_")
+        acc_num = f"{self.account_counter:05d}"
+        self.account_counter += 1
+        amount = f"{int(initial_balance * 100):08d}"
+        mm = f"{datetime.now().month:02d}"
+        return f"{cc}_{name_part}_{acc_num}_{amount}_{mm}"
+
+    def create_account(self, username, account_name, initial_balance=0):
+        if username not in self.users:
+            print("User not found.")
+            return
+
+        account_number = self._generate_account_number(account_name, initial_balance)
+        new_account = BankAccount(account_number, account_name, initial_balance)
+        self.accounts[account_number] = new_account
+        self._add_user_account(username, account_number)
+        print(f"Account created successfully!\nYour new account number: {account_number}")
+
+    def _add_user_account(self, username, account_number):
+        if username not in self.user_accounts:
+            self.user_accounts[username] = []
+        self.user_accounts[username].append(account_number)
 
     def get_account(self, account_number):
         return self.accounts.get(account_number)
 
-    def list_accounts(self):
-        for account in self.accounts.values():
-            print(
-                f"Account Number: {account.account_number}, Name: {account.account_name}, Balance: €{account.balance}")
+    def get_user_accounts(self, username):
+        return self.user_accounts.get(username, [])
+
+    def list_user_accounts(self, username):
+        if username not in self.user_accounts:
+            print("No accounts found.")
+            return
+        for acc_num in self.user_accounts[username]:
+            account = self.accounts[acc_num]
+            print(f"Account {acc_num}: {account.account_name} - €{account.balance:.2f}")
 
     def create_user(self, username, password):
         if username in self.users:
             print("Username already exists.")
-        else:
-            self.users[username] = password
-            print(f"User {username} created.")
+            return
+        hashed_pw = hashlib.sha256(password.encode()).hexdigest()
+        self.users[username] = hashed_pw
+        print(f"User {username} created.")
 
     def authenticate_user(self, username, password):
-        if username in self.users and self.users[username] == password:
-            return True
-        else:
-            return False
+        if username in self.users:
+            hashed_pw = hashlib.sha256(password.encode()).hexdigest()
+            return self.users[username] == hashed_pw
+        return False
+
+
+def validate_positive_number(prompt):
+    while True:
+        try:
+            value = float(input(prompt))
+            if value <= 0:
+                print("Amount must be positive.")
+                continue
+            return value
+        except ValueError:
+            print("Invalid input. Please enter a number.")
 
 
 def display_home_page():
     print("\n--- Welcome to Mini Bank ---")
-    print("-------------------------------")
-    print("A simple banking system for managing accounts.")
-    print("-------------------------------")
-    print("1. Proceed to Login")
-    print("2. Exit Application")
-
-    choice = input("Choose an option: ")
-
-    if choice == "1":
-        return True
-    elif choice == "2":
-        print("Exiting the application.")
-        return False
-    else:
-        print("Invalid choice. Please choose a valid option.")
-        return display_home_page()
+    print("\n--- This was created for base for Master AAB Project ---")
+    print("\n--- students for this project are: \nStudent: Fatmir Hasani - Frontend / Product Analyst\nStudent: Lendrit Berisha - Frontend / Product Analyst\nStudent: Majlind Avdylaj - Lead Programmer / Test\nStudent: Ertan Iliyaz - Backend programmer / Documentation\nMentor: Prof. Ass. Dr. Ramadan Dervishi (Product Owner)\n---")
+    print("1. Login")
+    print("2. Exit")
+    while True:
+        choice = input("Choose option (1-2): ")
+        if choice == "1":
+            return True
+        elif choice == "2":
+            print("Exiting application.")
+            return False
+        print("Invalid choice.")
 
 
 def login_page(bank):
-    print("\n--- Login Page ---")
-    username = input("Enter your username: ")
-    password = input("Enter your password: ")
-
+    print("\n--- Login ---")
+    username = input("Username: ").strip()
+    password = pwinput.pwinput("Password: ").strip()
     if bank.authenticate_user(username, password):
-        print("Login successful!")
+        print(f"Welcome {username}!")
         return username
-    else:
-        print("Invalid username or password. Please try again.")
-        return login_page(bank)
+    print("Invalid credentials.")
+    return None
+
+
+def main_menu(bank, username):
+    while True:
+        print("\n--- Main Menu ---")
+        print("1. Create Account")
+        print("2. Deposit")
+        print("3. Withdraw")
+        print("4. Check Balance")
+        print("5. Transfer Funds")
+        print("6. My Accounts")
+        print("7. Logout")
+
+        choice = input("Choose option (1-7): ")
+
+        if choice == "1":
+            account_name = input("Enter account holder's name: ").strip()
+            initial_balance = validate_positive_number("Initial deposit amount: ")
+            bank.create_account(username, account_name, initial_balance)
+
+        elif choice == "2":
+            acc_num = input("Enter account number: ").strip()
+            account = bank.get_account(acc_num)
+            if account and acc_num in bank.get_user_accounts(username):
+                amount = validate_positive_number("Deposit amount: ")
+                account.deposit(amount)
+            else:
+                print("Account not found or access denied.")
+
+        elif choice == "3":
+            acc_num = input("Enter account number: ").strip()
+            account = bank.get_account(acc_num)
+            if account and acc_num in bank.get_user_accounts(username):
+                amount = validate_positive_number("Withdrawal amount: ")
+                account.withdraw(amount)
+            else:
+                print("Account not found or access denied.")
+
+        elif choice == "4":
+            acc_num = input("Enter account number: ").strip()
+            account = bank.get_account(acc_num)
+            if account and acc_num in bank.get_user_accounts(username):
+                account.check_balance()
+            else:
+                print("Account not found or access denied.")
+
+        elif choice == "5":
+            sender_acc = input("Your account number: ").strip()
+            sender = bank.get_account(sender_acc)
+            if sender and sender_acc in bank.get_user_accounts(username):
+                recipient_acc = input("Recipient account number: ").strip()
+                recipient = bank.get_account(recipient_acc)
+                if recipient:
+                    amount = validate_positive_number("Transfer amount: ")
+                    sender.transfer(amount, recipient)
+                else:
+                    print("Recipient account not found.")
+            else:
+                print("Invalid sender account.")
+
+        elif choice == "6":
+            print("\n--- Your Accounts ---")
+            bank.list_user_accounts(username)
+
+        elif choice == "7":
+            print("Logging out...")
+            break
+
+        else:
+            print("Invalid choice.")
 
 
 def main():
     bank = BankSystem()
+    bank.create_user("admin", "123")
+    bank.create_user("user1", "123")
+    bank.create_user("user2", "123")
 
-    # Pre-register some users for demonstration
-    bank.create_user("admin", "123123")
-    bank.create_user("user1", "pass123")
+    while True:
+        if not display_home_page():
+            break
 
-    if display_home_page():
-        username = login_page(bank)
+        username = None
+        while not username:
+            username = login_page(bank)
 
-        while True:
-            print("\n--- Mini Bank Console ---")
-            print("1. Create Account")
-            print("2. Deposit")
-            print("3. Withdraw")
-            print("4. Check Balance")
-            print("5. Transfer Funds")
-            print("6. List Accounts")
-            print("7. Exit")
-
-            choice = input("Choose an option: ")
-
-            if choice == "1":
-                account_number = input("Enter account number: ")
-                account_name = input("Enter account name: ")
-                initial_balance = float(
-                    input("Enter initial balance (default=0): ") or 0)
-                bank.create_account(
-                    account_number, account_name, initial_balance)
-
-            elif choice == "2":
-                account_number = input("Enter account number: ")
-                account = bank.get_account(account_number)
-                if account:
-                    amount = float(input("Enter amount to deposit: "))
-                    account.deposit(amount)
-                else:
-                    print("Account not found.")
-
-            elif choice == "3":
-                account_number = input("Enter account number: ")
-                account = bank.get_account(account_number)
-                if account:
-                    amount = float(input("Enter amount to withdraw: "))
-                    account.withdraw(amount)
-                else:
-                    print("Account not found.")
-
-            elif choice == "4":
-                account_number = input("Enter account number: ")
-                account = bank.get_account(account_number)
-                if account:
-                    account.check_balance()
-                else:
-                    print("Account not found.")
-
-            elif choice == "5":
-                sender_account_number = input(
-                    "Enter sender's account number: ")
-                sender_account = bank.get_account(sender_account_number)
-                if sender_account:
-                    recipient_account_number = input(
-                        "Enter recipient's account number: ")
-                    recipient_account = bank.get_account(
-                        recipient_account_number)
-                    if recipient_account:
-                        amount = float(input("Enter amount to transfer: "))
-                        sender_account.transfer(amount, recipient_account)
-                    else:
-                        print("Recipient account not found.")
-                else:
-                    print("Sender account not found.")
-
-            elif choice == "6":
-                bank.list_accounts()
-
-            elif choice == "7":
-                print("Exiting the application.")
-                break
-
-            else:
-                print("Invalid choice. Please choose a valid option.")
+        main_menu(bank, username)
 
 
 if __name__ == "__main__":
