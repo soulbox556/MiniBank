@@ -5,6 +5,7 @@
 # v.1.4 Eshte finalizuar fajli dhe tani do te punohet permes github : EI MA
 
 import hashlib
+import json
 import pwinput
 from datetime import datetime
 import AppPrints as pr
@@ -43,9 +44,21 @@ class BankAccount:
 class BankSystem:
     def __init__(self):
         self.accounts = {}
-        self.users = {}
+        self.users = self.load_users_from_file()
         self.user_accounts = {}
         self.account_counter = 10000
+
+    def load_users_from_file(self):
+        try:
+            with open('users.json', 'r') as file:
+                users_data = json.load(file)
+                return users_data
+        except (FileNotFoundError, json.JSONDecodeError):
+            return {}
+
+    def save_users_to_file(self):
+        with open('users.json', 'w') as file:
+            json.dump(self.users, file, indent=4)
 
     def _generate_account_number(self, account_name, initial_balance):
         cc = "05"
@@ -92,6 +105,7 @@ class BankSystem:
             return
         hashed_pw = hashlib.sha256(password.encode()).hexdigest()
         self.users[username] = hashed_pw
+        self.save_users_to_file()
         pr.success(f"User {username} created.")
 
     def authenticate_user(self, username, password):
@@ -118,14 +132,20 @@ def display_home_page():
     pr.header("\n--- This was created for base for Master AAB Project ---")
     pr.header("\n--- students for this project are: \nStudent: Fatmir Hasani - Frontend / Product Analyst\nStudent: Lendrit Berisha - Frontend / Product Analyst\nStudent: Majlind Avdylaj - Lead Programmer / Test\nStudent: Ertan Iliyaz - Backend programmer / Documentation\nMentor: Prof. Ass. Dr. Ramadan Dervishi (Product Owner)\n---")
     pr.menu("1. Login")
-    pr.menu("2. Exit")
+    pr.menu("2. Register")
+    pr.menu("3. Exit")
+    
     while True:
-        choice = input("Choose option (1-2): ")
+        choice = input("Choose option (1-3): ")
+        
         if choice == "1":
-            return True
+            return "login"
         elif choice == "2":
+            return "register"
+        elif choice == "3":
             pr.warning("Exiting application.")
-            return False
+            return "exit"
+        
         pr.error("Invalid choice.")
 
 
@@ -138,6 +158,25 @@ def login_page(bank):
         return username
     pr.error("Invalid credentials.")
     return None
+
+def register_page(bank):
+    pr.header("\n--- Register ---")
+    username = input("Enter new username: ").strip()
+    
+    if username in bank.users:
+        pr.error("Username already exists.")
+        return None
+    
+    password = pwinput.pwinput("Enter password: ").strip()
+    confirm_password = pwinput.pwinput("Confirm password: ").strip()
+    
+    if password != confirm_password:
+        pr.error("Passwords do not match.")
+        return None
+    
+    bank.create_user(username, password)
+    pr.success(f"User {username} registered successfully!")
+    return username
 
 
 def main_menu(bank, username):
@@ -212,19 +251,21 @@ def main_menu(bank, username):
 
 def main():
     bank = BankSystem()
-    bank.create_user("admin", "123")
-    bank.create_user("user1", "123")
-    bank.create_user("user2", "123")
 
     while True:
-        if not display_home_page():
+        choice = display_home_page()
+
+        if choice == "exit":
             break
-
-        username = None
-        while not username:
-            username = login_page(bank)
-
-        main_menu(bank, username)
+        elif choice == "login":
+            username = None
+            while not username:
+                username = login_page(bank)
+            main_menu(bank, username)
+        elif choice == "register":
+            username = register_page(bank)
+            if username:
+                main_menu(bank, username)
 
 
 if __name__ == "__main__":
