@@ -7,7 +7,7 @@
 import hashlib
 import pwinput
 from datetime import datetime
-
+import AppPrints as pr
 
 class BankAccount:
     def __init__(self, account_number, account_name, balance=0):
@@ -18,25 +18,25 @@ class BankAccount:
 
     def deposit(self, amount):
         self.balance += amount
-        print(f"Deposited €{amount:.2f}. New balance is €{self.balance:.2f}.")
+        pr.success(f"Deposited €{amount:.2f}. New balance is €{self.balance:.2f}.")
 
     def withdraw(self, amount):
         if amount > self.balance:
-            print("Insufficient funds.")
+            pr.error("Insufficient funds.")
         else:
             self.balance -= amount
-            print(f"Withdrew €{amount:.2f}. New balance is €{self.balance:.2f}.")
+            pr.success(f"Withdrew €{amount:.2f}. New balance is €{self.balance:.2f}.")
 
     def check_balance(self):
-        print(f"Current balance is €{self.balance:.2f}.")
+        pr.success(f"Current balance is €{self.balance:.2f}.")
 
     def transfer(self, amount, recipient_account):
         if amount > self.balance:
-            print("Insufficient funds.")
+            pr.error("Insufficient funds.")
         else:
             self.balance -= amount
             recipient_account.balance += amount
-            print(
+            pr.success(
                 f"Transferred €{amount:.2f} to account {recipient_account.account_number}. New balance is €{self.balance:.2f}.")
 
 
@@ -58,14 +58,14 @@ class BankSystem:
 
     def create_account(self, username, account_name, initial_balance=0):
         if username not in self.users:
-            print("User not found.")
+            pr.warning("User not found.")
             return
 
         account_number = self._generate_account_number(account_name, initial_balance)
         new_account = BankAccount(account_number, account_name, initial_balance)
         self.accounts[account_number] = new_account
         self._add_user_account(username, account_number)
-        print(f"Account created successfully!\nYour new account number: {account_number}")
+        pr.success(f"Account created successfully!\nYour new account number: {account_number}")
 
     def _add_user_account(self, username, account_number):
         if username not in self.user_accounts:
@@ -80,19 +80,19 @@ class BankSystem:
 
     def list_user_accounts(self, username):
         if username not in self.user_accounts:
-            print("No accounts found.")
+            pr.warning("No accounts found.")
             return
         for acc_num in self.user_accounts[username]:
             account = self.accounts[acc_num]
-            print(f"Account {acc_num}: {account.account_name} - €{account.balance:.2f}")
+            pr.success(f"Account {acc_num}: {account.account_name} - €{account.balance:.2f}")
 
     def create_user(self, username, password):
         if username in self.users:
-            print("Username already exists.")
+            pr.error("Username already exists.")
             return
         hashed_pw = hashlib.sha256(password.encode()).hexdigest()
         self.users[username] = hashed_pw
-        print(f"User {username} created.")
+        pr.success(f"User {username} created.")
 
     def authenticate_user(self, username, password):
         if username in self.users:
@@ -106,50 +106,50 @@ def validate_positive_number(prompt):
         try:
             value = float(input(prompt))
             if value <= 0:
-                print("Amount must be positive.")
+                pr.error("Amount must be positive.")
                 continue
             return value
         except ValueError:
-            print("Invalid input. Please enter a number.")
+            pr.error("Invalid input. Please enter a number.")
 
 
 def display_home_page():
-    print("\n--- Welcome to Mini Bank ---")
-    print("\n--- This was created for base for Master AAB Project ---")
-    print("\n--- students for this project are: \nStudent: Fatmir Hasani - Frontend / Product Analyst\nStudent: Lendrit Berisha - Frontend / Product Analyst\nStudent: Majlind Avdylaj - Lead Programmer / Test\nStudent: Ertan Iliyaz - Backend programmer / Documentation\nMentor: Prof. Ass. Dr. Ramadan Dervishi (Product Owner)\n---")
-    print("1. Login")
-    print("2. Exit")
+    pr.header("\n--- Welcome to Mini Bank ---")
+    pr.header("\n--- This was created for base for Master AAB Project ---")
+    pr.header("\n--- students for this project are: \nStudent: Fatmir Hasani - Frontend / Product Analyst\nStudent: Lendrit Berisha - Frontend / Product Analyst\nStudent: Majlind Avdylaj - Lead Programmer / Test\nStudent: Ertan Iliyaz - Backend programmer / Documentation\nMentor: Prof. Ass. Dr. Ramadan Dervishi (Product Owner)\n---")
+    pr.menu("1. Login")
+    pr.menu("2. Exit")
     while True:
         choice = input("Choose option (1-2): ")
         if choice == "1":
             return True
         elif choice == "2":
-            print("Exiting application.")
+            pr.warning("Exiting application.")
             return False
-        print("Invalid choice.")
+        pr.error("Invalid choice.")
 
 
 def login_page(bank):
-    print("\n--- Login ---")
+    pr.header("\n--- Login ---")
     username = input("Username: ").strip()
     password = pwinput.pwinput("Password: ").strip()
     if bank.authenticate_user(username, password):
-        print(f"Welcome {username}!")
+        pr.success(f"Welcome {username}!")
         return username
-    print("Invalid credentials.")
+    pr.error("Invalid credentials.")
     return None
 
 
 def main_menu(bank, username):
     while True:
-        print("\n--- Main Menu ---")
-        print("1. Create Account")
-        print("2. Deposit")
-        print("3. Withdraw")
-        print("4. Check Balance")
-        print("5. Transfer Funds")
-        print("6. My Accounts")
-        print("7. Logout")
+        pr.header("\n--- Main Menu ---")
+        pr.menu("1. Create Account")
+        pr.menu("2. Deposit")
+        pr.menu("3. Withdraw")
+        pr.menu("4. Check Balance")
+        pr.menu("5. Transfer Funds")
+        pr.menu("6. My Accounts")
+        pr.menu("7. Logout")
 
         choice = input("Choose option (1-7): ")
 
@@ -165,7 +165,7 @@ def main_menu(bank, username):
                 amount = validate_positive_number("Deposit amount: ")
                 account.deposit(amount)
             else:
-                print("Account not found or access denied.")
+                pr.error("Account not found or access denied.")
 
         elif choice == "3":
             acc_num = input("Enter account number: ").strip()
@@ -174,7 +174,7 @@ def main_menu(bank, username):
                 amount = validate_positive_number("Withdrawal amount: ")
                 account.withdraw(amount)
             else:
-                print("Account not found or access denied.")
+                pr.error("Account not found or access denied.")
 
         elif choice == "4":
             acc_num = input("Enter account number: ").strip()
@@ -182,7 +182,7 @@ def main_menu(bank, username):
             if account and acc_num in bank.get_user_accounts(username):
                 account.check_balance()
             else:
-                print("Account not found or access denied.")
+                pr.error("Account not found or access denied.")
 
         elif choice == "5":
             sender_acc = input("Your account number: ").strip()
@@ -194,20 +194,20 @@ def main_menu(bank, username):
                     amount = validate_positive_number("Transfer amount: ")
                     sender.transfer(amount, recipient)
                 else:
-                    print("Recipient account not found.")
+                    pr.error("Recipient account not found.")
             else:
-                print("Invalid sender account.")
+                pr.error("Invalid sender account.")
 
         elif choice == "6":
-            print("\n--- Your Accounts ---")
+            pr.header("\n--- Your Accounts ---")
             bank.list_user_accounts(username)
 
         elif choice == "7":
-            print("Logging out...")
+            pr.warning("Logging out...")
             break
 
         else:
-            print("Invalid choice.")
+            pr.error("Invalid choice.")
 
 
 def main():
