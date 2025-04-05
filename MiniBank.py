@@ -1,14 +1,21 @@
-# v1 first code
-# v1.1 with some specifications
-# v.1.2 hide passwords
-# v.1.3 authomatic acount number example
-# v.1.4 Eshte finalizuar fajli dhe tani do te punohet permes github : EI MA
+# v1 Ertan: first code
+# v1.1 Ertan: with some specifications
+# v.1.2 Ertan: hide passwords
+# v.1.3 Ertan: authomatic acount number example
+# v.1.4 Ertan: Eshte finalizuar fajli dhe tani do te punohet permes github : EI MA
+#
+# v.1.5 Majlini ka punuar 05/04/2025
+#   1. Me mujt me kriju account
+#   2. ⁠printat ne console dalin me ngjyra
+#   3. ⁠edhe userat ruhen ne nje file
+
 
 import hashlib
 import json
 import pwinput
 from datetime import datetime
 import AppPrints as pr
+
 
 class BankAccount:
     def __init__(self, account_number, account_name, balance=0):
@@ -19,14 +26,16 @@ class BankAccount:
 
     def deposit(self, amount):
         self.balance += amount
-        pr.success(f"Deposited €{amount:.2f}. New balance is €{self.balance:.2f}.")
+        pr.success(
+            f"Deposited €{amount:.2f}. New balance is €{self.balance:.2f}.")
 
     def withdraw(self, amount):
         if amount > self.balance:
             pr.error("Insufficient funds.")
         else:
             self.balance -= amount
-            pr.success(f"Withdrew €{amount:.2f}. New balance is €{self.balance:.2f}.")
+            pr.success(
+                f"Withdrew €{amount:.2f}. New balance is €{self.balance:.2f}.")
 
     def check_balance(self):
         pr.success(f"Current balance is €{self.balance:.2f}.")
@@ -74,11 +83,14 @@ class BankSystem:
             pr.warning("User not found.")
             return
 
-        account_number = self._generate_account_number(account_name, initial_balance)
-        new_account = BankAccount(account_number, account_name, initial_balance)
+        account_number = self._generate_account_number(
+            account_name, initial_balance)
+        new_account = BankAccount(
+            account_number, account_name, initial_balance)
         self.accounts[account_number] = new_account
         self._add_user_account(username, account_number)
-        pr.success(f"Account created successfully!\nYour new account number: {account_number}")
+        pr.success(
+            f"Account created successfully!\nYour new account number: {account_number}")
 
     def _add_user_account(self, username, account_number):
         if username not in self.user_accounts:
@@ -97,7 +109,8 @@ class BankSystem:
             return
         for acc_num in self.user_accounts[username]:
             account = self.accounts[acc_num]
-            pr.success(f"Account {acc_num}: {account.account_name} - €{account.balance:.2f}")
+            pr.success(
+                f"Account {acc_num}: {account.account_name} - €{account.balance:.2f}")
 
     def create_user(self, username, password):
         if username in self.users:
@@ -134,10 +147,10 @@ def display_home_page():
     pr.menu("1. Login")
     pr.menu("2. Register")
     pr.menu("3. Exit")
-    
+
     while True:
         choice = input("Choose option (1-3): ")
-        
+
         if choice == "1":
             return "login"
         elif choice == "2":
@@ -145,7 +158,7 @@ def display_home_page():
         elif choice == "3":
             pr.warning("Exiting application.")
             return "exit"
-        
+
         pr.error("Invalid choice.")
 
 
@@ -159,21 +172,22 @@ def login_page(bank):
     pr.error("Invalid credentials.")
     return None
 
+
 def register_page(bank):
     pr.header("\n--- Register ---")
     username = input("Enter new username: ").strip()
-    
+
     if username in bank.users:
         pr.error("Username already exists.")
         return None
-    
+
     password = pwinput.pwinput("Enter password: ").strip()
     confirm_password = pwinput.pwinput("Confirm password: ").strip()
-    
+
     if password != confirm_password:
         pr.error("Passwords do not match.")
         return None
-    
+
     bank.create_user(username, password)
     pr.success(f"User {username} registered successfully!")
     return username
@@ -194,7 +208,8 @@ def main_menu(bank, username):
 
         if choice == "1":
             account_name = input("Enter account holder's name: ").strip()
-            initial_balance = validate_positive_number("Initial deposit amount: ")
+            initial_balance = validate_positive_number(
+                "Initial deposit amount: ")
             bank.create_account(username, account_name, initial_balance)
 
         elif choice == "2":
