@@ -8,6 +8,8 @@
 #   1. Me mujt me kriju account
 #   2. ⁠printat ne console dalin me ngjyra
 #   3. ⁠edhe userat ruhen ne nje file
+#
+# v.1.6 Majlind: Fix read and write users to file and fix login loop 
 
 
 import hashlib
