@@ -12,6 +12,7 @@
 
 import hashlib
 import json
+import os
 import pwinput
 from datetime import datetime
 import AppPrints as pr
@@ -57,16 +58,19 @@ class BankSystem:
         self.user_accounts = {}
         self.account_counter = 10000
 
+    def get_users_file_path(self):
+        return os.path.join(os.path.dirname(os.path.abspath(__file__)), 'users.json')
+
     def load_users_from_file(self):
         try:
-            with open('users.json', 'r') as file:
+            with open(self.get_users_file_path(), 'r') as file:
                 users_data = json.load(file)
                 return users_data
         except (FileNotFoundError, json.JSONDecodeError):
             return {}
 
     def save_users_to_file(self):
-        with open('users.json', 'w') as file:
+        with open(self.get_users_file_path(), 'w') as file:
             json.dump(self.users, file, indent=4)
 
     def _generate_account_number(self, account_name, initial_balance):
@@ -273,10 +277,9 @@ def main():
         if choice == "exit":
             break
         elif choice == "login":
-            username = None
-            while not username:
-                username = login_page(bank)
-            main_menu(bank, username)
+            username = login_page(bank)
+            if username:
+                main_menu(bank, username)
         elif choice == "register":
             username = register_page(bank)
             if username:
