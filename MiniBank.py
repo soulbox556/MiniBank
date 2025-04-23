@@ -10,6 +10,9 @@
 #   3. ⁠edhe userat ruhen ne nje file
 #
 # v.1.6 Majlind: Fix read and write users to file and fix login loop 
+# v.1.7 Majlind: 
+#   1. Fix create user with empty username and password
+#   2. Make possible to return back on menu by entering 0
 
 
 import hashlib
@@ -119,6 +122,9 @@ class BankSystem:
                 f"Account {acc_num}: {account.account_name} - €{account.balance:.2f}")
 
     def create_user(self, username, password):
+        if not username or not password:
+            pr.error("Username and password cannot be empty.")
+            return
         if username in self.users:
             pr.error("Username already exists.")
             return
@@ -138,7 +144,7 @@ def validate_positive_number(prompt):
     while True:
         try:
             value = float(input(prompt))
-            if value <= 0:
+            if value < 0:
                 pr.error("Amount must be positive.")
                 continue
             return value
@@ -170,8 +176,15 @@ def display_home_page():
 
 def login_page(bank):
     pr.header("\n--- Login ---")
+    pr.menu("Enter 0 to go back.")
     username = input("Username: ").strip()
+    if username == "0":
+        return None
+
     password = pwinput.pwinput("Password: ").strip()
+    if password == "0":
+        return None
+
     if bank.authenticate_user(username, password):
         pr.success(f"Welcome {username}!")
         return username
@@ -179,16 +192,33 @@ def login_page(bank):
     return None
 
 
+
 def register_page(bank):
     pr.header("\n--- Register ---")
+    pr.menu("Enter 0 to go back.")
     username = input("Enter new username: ").strip()
+    if username == "0":
+        return None
+
+    if not username:
+        pr.error("Username cannot be empty.")
+        return None
 
     if username in bank.users:
         pr.error("Username already exists.")
         return None
 
     password = pwinput.pwinput("Enter password: ").strip()
+    if password == "0":
+        return None
+
+    if not password:
+        pr.error("Password cannot be empty.")
+        return None
+
     confirm_password = pwinput.pwinput("Confirm password: ").strip()
+    if confirm_password == "0":
+        return None
 
     if password != confirm_password:
         pr.error("Passwords do not match.")
@@ -197,6 +227,7 @@ def register_page(bank):
     bank.create_user(username, password)
     pr.success(f"User {username} registered successfully!")
     return username
+
 
 
 def main_menu(bank, username):
@@ -213,31 +244,51 @@ def main_menu(bank, username):
         choice = input("Choose option (1-7): ")
 
         if choice == "1":
+            pr.menu("Enter 0 to go back.")
             account_name = input("Enter account holder's name: ").strip()
-            initial_balance = validate_positive_number(
-                "Initial deposit amount: ")
+            if account_name == "0":
+                continue
+            initial_balance = validate_positive_number("Initial deposit amount (or 0 to cancel): ")
+            if initial_balance == 0:
+                pr.warning("Cancelled creating account.")
+                continue
             bank.create_account(username, account_name, initial_balance)
 
         elif choice == "2":
+            pr.menu("Enter 0 to go back.")
             acc_num = input("Enter account number: ").strip()
+            if acc_num == "0":
+                continue
             account = bank.get_account(acc_num)
             if account and acc_num in bank.get_user_accounts(username):
-                amount = validate_positive_number("Deposit amount: ")
+                amount = validate_positive_number("Deposit amount (or 0 to cancel): ")
+                if amount == 0:
+                    pr.warning("Deposit cancelled.")
+                    continue
                 account.deposit(amount)
             else:
                 pr.error("Account not found or access denied.")
 
         elif choice == "3":
+            pr.menu("Enter 0 to go back.")
             acc_num = input("Enter account number: ").strip()
+            if acc_num == "0":
+                continue
             account = bank.get_account(acc_num)
             if account and acc_num in bank.get_user_accounts(username):
-                amount = validate_positive_number("Withdrawal amount: ")
+                amount = validate_positive_number("Withdrawal amount (or 0 to cancel): ")
+                if amount == 0:
+                    pr.warning("Withdrawal cancelled.")
+                    continue
                 account.withdraw(amount)
             else:
                 pr.error("Account not found or access denied.")
 
         elif choice == "4":
+            pr.menu("Enter 0 to go back.")
             acc_num = input("Enter account number: ").strip()
+            if acc_num == "0":
+                continue
             account = bank.get_account(acc_num)
             if account and acc_num in bank.get_user_accounts(username):
                 account.check_balance()
@@ -245,13 +296,21 @@ def main_menu(bank, username):
                 pr.error("Account not found or access denied.")
 
         elif choice == "5":
+            pr.menu("Enter 0 to go back.")
             sender_acc = input("Your account number: ").strip()
+            if sender_acc == "0":
+                continue
             sender = bank.get_account(sender_acc)
             if sender and sender_acc in bank.get_user_accounts(username):
                 recipient_acc = input("Recipient account number: ").strip()
+                if recipient_acc == "0":
+                    continue
                 recipient = bank.get_account(recipient_acc)
                 if recipient:
-                    amount = validate_positive_number("Transfer amount: ")
+                    amount = validate_positive_number("Transfer amount (or 0 to cancel): ")
+                    if amount == 0:
+                        pr.warning("Transfer cancelled.")
+                        continue
                     sender.transfer(amount, recipient)
                 else:
                     pr.error("Recipient account not found.")
