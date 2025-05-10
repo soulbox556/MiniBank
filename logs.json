@@ -1,0 +1,116 @@
+[
+    {
+        "timestamp": "2025-05-10T13:19:49.256392",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-10T13:20:00.521100",
+        "username": "admin",
+        "action": "Account created",
+        "details": "Account Number: 05_E____________________10000_00000100_05, Initial Balance: 1.0"
+    },
+    {
+        "timestamp": "2025-05-10T13:20:23.970989",
+        "username": "admin",
+        "action": "User logout",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-10T13:33:29.949040",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-10T13:34:17.419329",
+        "username": "admin",
+        "action": "Account created",
+        "details": "Account Number: 05_EEE__________________10000_00140000_05, Initial Balance: 1400.0"
+    },
+    {
+        "timestamp": "2025-05-10T13:34:35.307434",
+        "username": "admin",
+        "action": "Account created",
+        "details": "Account Number: 05_BBB__________________10001_00200000_05, Initial Balance: 2000.0"
+    },
+    {
+        "timestamp": "2025-05-10T13:35:57.639349",
+        "username": "eee",
+        "action": "Transfer",
+        "details": "From: 05_EEE__________________10000_00140000_05, To: 05_BBB__________________10001_00200000_05, Amount: 400.0"
+    },
+    {
+        "timestamp": "2025-05-10T13:42:09.044495",
+        "username": "admin",
+        "action": "User logout",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-10T13:42:42.843486",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-10T13:44:04.108931",
+        "username": "admin",
+        "action": "User logout",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-10T13:44:13.500989",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-10T13:45:04.289949",
+        "username": "admin",
+        "action": "Account created",
+        "details": "Account Number: 05_FATMIR_______________10002_00050000_05, Initial Balance: 500.0"
+    },
+    {
+        "timestamp": "2025-05-10T13:45:41.627197",
+        "username": "Fatmir",
+        "action": "Transfer",
+        "details": "From: 05_FATMIR_______________10002_00050000_05, To: 05_EEE__________________10000_00140000_05, Amount: 300.0"
+    },
+    {
+        "timestamp": "2025-05-10T13:46:25.962420",
+        "username": "admin",
+        "action": "User logout",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-10T13:46:36.800199",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-10T13:47:41.677569",
+        "username": "bbb",
+        "action": "Withdraw",
+        "details": "Account: 05_BBB__________________10001_00200000_05, Amount: 400.0"
+    },
+    {
+        "timestamp": "2025-05-10T13:47:56.777128",
+        "username": "bbb",
+        "action": "Withdraw",
+        "details": "Account: 05_BBB__________________10001_00200000_05, Amount: 600.0"
+    },
+    {
+        "timestamp": "2025-05-10T13:49:15.824767",
+        "username": "bbb",
+        "action": "Transfer",
+        "details": "From: 05_BBB__________________10001_00200000_05, To: 05_FATMIR_______________10002_00050000_05, Amount: 1001.0"
+    },
+    {
+        "timestamp": "2025-05-10T13:50:38.293293",
+        "username": "admin",
+        "action": "User logout",
+        "details": ""
+    }
+]

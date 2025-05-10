@@ -1,4 +1,5 @@
-# v1 Ertan: first code
+# ----------------------------------------------------------------------
+#  v1 Ertan: first code
 # v1.1 Ertan: with some specifications
 # v.1.2 Ertan: hide passwords
 # v.1.3 Ertan: authomatic acount number example
@@ -9,18 +10,42 @@
 #   2. ⁠printat ne console dalin me ngjyra
 #   3. ⁠edhe userat ruhen ne nje file
 #
-# v.1.6 Majlind: Fix read and write users to file and fix login loop 
-# v.1.7 Majlind: 
+# v.1.6 Majlind: Fix read and write users to file and fix login loop
+# v.1.7 Majlind:
 #   1. Fix create user with empty username and password
-#   2. Make possible to return back on menu by entering 0
-
-
+#   2. Make possible to return back on menu by entering
+# v1.8 EI+MA (with logging)
+#  1.8.1 included via a logs.json file all acctivities The logging function log_activity is used throughout the application to record key actions
+# -----------------------------------------------------------------------------------
 import hashlib
 import json
 import os
 import pwinput
 from datetime import datetime
 import AppPrints as pr
+
+
+def log_activity(action, username=None, details=None):
+    log_file_path = os.path.join(os.path.dirname(
+        os.path.abspath(__file__)), 'logs.json')
+    log_entry = {
+        "timestamp": datetime.now().isoformat(),
+        "username": username or "SYSTEM",
+        "action": action,
+        "details": details or ""
+    }
+    try:
+        if os.path.exists(log_file_path):
+            with open(log_file_path, 'r') as f:
+                logs = json.load(f)
+        else:
+            logs = []
+    except (FileNotFoundError, json.JSONDecodeError):
+        logs = []
+
+    logs.append(log_entry)
+    with open(log_file_path, 'w') as f:
+        json.dump(logs, f, indent=4)
 
 
 class BankAccount:
@@ -32,6 +57,8 @@ class BankAccount:
 
     def deposit(self, amount):
         self.balance += amount
+        log_activity("Deposit", self.account_name,
+                     f"Account: {self.account_number}, Amount: {amount}")
         pr.success(
             f"Deposited €{amount:.2f}. New balance is €{self.balance:.2f}.")
 
@@ -40,6 +67,8 @@ class BankAccount:
             pr.error("Insufficient funds.")
         else:
             self.balance -= amount
+            log_activity("Withdraw", self.account_name,
+                         f"Account: {self.account_number}, Amount: {amount}")
             pr.success(
                 f"Withdrew €{amount:.2f}. New balance is €{self.balance:.2f}.")
 
@@ -52,6 +81,8 @@ class BankAccount:
         else:
             self.balance -= amount
             recipient_account.balance += amount
+            log_activity("Transfer", self.account_name,
+                         f"From: {self.account_number}, To: {recipient_account.account_number}, Amount: {amount}")
             pr.success(
                 f"Transferred €{amount:.2f} to account {recipient_account.account_number}. New balance is €{self.balance:.2f}.")
 
@@ -98,6 +129,8 @@ class BankSystem:
             account_number, account_name, initial_balance)
         self.accounts[account_number] = new_account
         self._add_user_account(username, account_number)
+        log_activity("Account created", username,
+                     f"Account Number: {account_number}, Initial Balance: {initial_balance}")
         pr.success(
             f"Account created successfully!\nYour new account number: {account_number}")
 
@@ -131,6 +164,7 @@ class BankSystem:
         hashed_pw = hashlib.sha256(password.encode()).hexdigest()
         self.users[username] = hashed_pw
         self.save_users_to_file()
+        log_activity("User registered", username)
         pr.success(f"User {username} created.")
 
     def authenticate_user(self, username, password):
@@ -169,8 +203,8 @@ def display_home_page():
             return "register"
         elif choice == "3":
             pr.warning("Exiting application.")
+            log_activity("Application exit")
             return "exit"
-
         pr.error("Invalid choice.")
 
 
@@ -187,10 +221,10 @@ def login_page(bank):
 
     if bank.authenticate_user(username, password):
         pr.success(f"Welcome {username}!")
+        log_activity("User login", username)
         return username
     pr.error("Invalid credentials.")
     return None
-
 
 
 def register_page(bank):
@@ -229,7 +263,6 @@ def register_page(bank):
     return username
 
 
-
 def main_menu(bank, username):
     while True:
         pr.header("\n--- Main Menu ---")
@@ -248,7 +281,8 @@ def main_menu(bank, username):
             account_name = input("Enter account holder's name: ").strip()
             if account_name == "0":
                 continue
-            initial_balance = validate_positive_number("Initial deposit amount (or 0 to cancel): ")
+            initial_balance = validate_positive_number(
+                "Initial deposit amount (or 0 to cancel): ")
             if initial_balance == 0:
                 pr.warning("Cancelled creating account.")
                 continue
@@ -261,7 +295,8 @@ def main_menu(bank, username):
                 continue
             account = bank.get_account(acc_num)
             if account and acc_num in bank.get_user_accounts(username):
-                amount = validate_positive_number("Deposit amount (or 0 to cancel): ")
+                amount = validate_positive_number(
+                    "Deposit amount (or 0 to cancel): ")
                 if amount == 0:
                     pr.warning("Deposit cancelled.")
                     continue
@@ -276,7 +311,8 @@ def main_menu(bank, username):
                 continue
             account = bank.get_account(acc_num)
             if account and acc_num in bank.get_user_accounts(username):
-                amount = validate_positive_number("Withdrawal amount (or 0 to cancel): ")
+                amount = validate_positive_number(
+                    "Withdrawal amount (or 0 to cancel): ")
                 if amount == 0:
                     pr.warning("Withdrawal cancelled.")
                     continue
@@ -307,7 +343,8 @@ def main_menu(bank, username):
                     continue
                 recipient = bank.get_account(recipient_acc)
                 if recipient:
-                    amount = validate_positive_number("Transfer amount (or 0 to cancel): ")
+                    amount = validate_positive_number(
+                        "Transfer amount (or 0 to cancel): ")
                     if amount == 0:
                         pr.warning("Transfer cancelled.")
                         continue
@@ -323,6 +360,7 @@ def main_menu(bank, username):
 
         elif choice == "7":
             pr.warning("Logging out...")
+            log_activity("User logout", username)
             break
 
         else:
