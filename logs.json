@@ -1522,5 +1522,11 @@
         "username": "admin",
         "action": "Account created",
         "details": "Account Number: 05_LINDI________________10000_00050000_05, Initial Balance: 500.0"
+    },
+    {
+        "timestamp": "2025-05-14T14:04:48.917282",
+        "username": "admin",
+        "action": "Account created",
+        "details": "Account Number: 05_TEST_________________10001_00010000_05, Initial Balance: 100.0"
     }
 ]

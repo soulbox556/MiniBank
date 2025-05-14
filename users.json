@@ -6,6 +6,11 @@
                 "account_number": "05_LINDI________________10000_00050000_05",
                 "account_name": "lindi",
                 "balance": 500.0
+            },
+            {
+                "account_number": "05_TEST_________________10001_00010000_05",
+                "account_name": "test",
+                "balance": 100.0
             }
         ],
         "transfers": [
