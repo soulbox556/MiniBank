@@ -16,6 +16,13 @@
 #   2. Make possible to return back on menu by entering
 # v1.8 EI+MA (with logging)
 #  1.8.1 included via a logs.json file all acctivities The logging function log_activity is used throughout the application to record key actions
+#
+# v.1.9 Majlind
+#   1. Validate transfers and withdrawals
+#   2. Add transfers and accounts to json file
+#   3. Add Integration testings
+#   4. Add Pay Bills
+#   5. Add Delete Account
 # -----------------------------------------------------------------------------------
 import hashlib
 import json
