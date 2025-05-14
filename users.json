@@ -3,14 +3,9 @@
         "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
         "accounts": [
             {
-                "account_number": "05_TEST_________________10000_00050000_05",
-                "account_name": "test",
-                "balance": 500.0
-            },
-            {
-                "account_number": "05_LINDI________________10000_00012300_05",
+                "account_number": "05_LINDI________________10000_00050000_05",
                 "account_name": "lindi",
-                "balance": 123.0
+                "balance": 500.0
             }
         ],
         "transfers": [

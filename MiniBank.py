@@ -256,6 +256,34 @@ class BankSystem:
             return self.users[username]["password"] == hashed_pw
         return False
 
+    def delete_account(self, username, account_number):
+        if username not in self.users:
+            pr.error("User not found.")
+            return
+
+        # Find and remove account from user's account list
+        user_accounts = self.users[username].get("accounts", [])
+        updated_accounts = [acc for acc in user_accounts if acc["account_number"] != account_number]
+        
+        if len(user_accounts) == len(updated_accounts):
+            pr.error("Account number not found under your profile.")
+            return
+
+        self.users[username]["accounts"] = updated_accounts
+
+        # Remove from self.accounts
+        if account_number in self.accounts:
+            del self.accounts[account_number]
+
+        # Remove from self.user_accounts
+        if username in self.user_accounts:
+            self.user_accounts[username] = [
+                acc_num for acc_num in self.user_accounts[username] if acc_num != account_number
+            ]
+
+        self.save_users_to_file()
+        log_activity("Account deleted", username, f"Account Number: {account_number}")
+        pr.success(f"Account {account_number} deleted successfully.")
 
 def validate_positive_number(prompt):
     while True:
@@ -369,7 +397,8 @@ def main_menu(bank, username):
         pr.menu("5. Transfer Funds")
         pr.menu("6. My Accounts")
         pr.menu("7. Pay Bill")
-        pr.menu("8. Logout")
+        pr.menu("8. Delete Account")
+        pr.menu("9. Logout")
 
         choice = input("Choose option (1-8): ")
 
@@ -477,10 +506,20 @@ def main_menu(bank, username):
 
             success = account.pay_bill(company, amount, bank, username)
             if success:
-                # Optionally track session total if needed in-memory
                 pass
-
         elif choice == "8":
+            pr.header("\n--- Your Accounts ---")
+            bank.list_user_accounts(username)
+            pr.menu("Enter 0 to go back.")
+            acc_num = input("Enter account number to delete: ").strip()
+            if acc_num == "0":
+                continue
+            if acc_num not in bank.get_user_accounts(username):
+                pr.error("Account not found or access denied.")
+                continue
+            bank.delete_account(username, acc_num)
+
+        elif choice == "9":
             pr.warning("Logging out...")
             log_activity("User logout", username)
             break

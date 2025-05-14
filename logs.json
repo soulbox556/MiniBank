@@ -1492,5 +1492,35 @@
         "username": "admin",
         "action": "User login",
         "details": ""
+    },
+    {
+        "timestamp": "2025-05-14T14:01:34.375742",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-14T14:01:55.463408",
+        "username": "admin",
+        "action": "Account deleted",
+        "details": "Account Number: 05_TEST_________________10000_00050000_05"
+    },
+    {
+        "timestamp": "2025-05-14T14:02:11.920234",
+        "username": "admin",
+        "action": "Account deleted",
+        "details": "Account Number: 05_LINDI________________10000_00012300_05"
+    },
+    {
+        "timestamp": "2025-05-14T14:02:40.875102",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-14T14:03:23.369961",
+        "username": "admin",
+        "action": "Account created",
+        "details": "Account Number: 05_LINDI________________10000_00050000_05, Initial Balance: 500.0"
     }
 ]
