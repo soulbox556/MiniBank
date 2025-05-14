@@ -65,6 +65,8 @@ class BankAccount:
     def withdraw(self, amount):
         if amount > self.balance:
             pr.error("Insufficient funds.")
+        elif amount > 1000:
+            pr.error("Max withdrawal amount is 1000€.")
         else:
             self.balance -= amount
             log_activity("Withdraw", self.account_name,
@@ -78,6 +80,8 @@ class BankAccount:
     def transfer(self, amount, recipient_account):
         if amount > self.balance:
             pr.error("Insufficient funds.")
+        elif amount > 500:
+            pr.error("Max transfer amount is 500€.")
         else:
             self.balance -= amount
             recipient_account.balance += amount
