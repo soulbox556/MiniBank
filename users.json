@@ -1,11 +1,36 @@
 {
-    "admin": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-    "user1": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-    "user2": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-    "lindi": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-    "qwe": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-    "ertan": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-    "lb": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "tred": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-    "dwad": "489cd5dbc708c7e541de4d7cd91ce6d0f1613573b7fc5b40d3942ccb9555cf35"
+    "admin": {
+        "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "accounts": [
+            {
+                "account_number": "05_TEST_________________10000_00050000_05",
+                "account_name": "test",
+                "balance": 500.0
+            },
+            {
+                "account_number": "05_LINDI________________10000_00012300_05",
+                "account_name": "lindi",
+                "balance": 123.0
+            }
+        ],
+        "transfers": [
+            {
+                "from": "05_TEST_________________10000_00050000_05",
+                "to": "05_LINDI________________10000_00012300_05",
+                "amount": 200.0,
+                "timestamp": "2025-05-14T10:05:02.835870"
+            }
+        ]
+    },
+    "lindi": {
+        "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "accounts": [
+            {
+                "account_number": "05_TEST_________________10000_01000000_05",
+                "account_name": "test",
+                "balance": 10000.0
+            }
+        ],
+        "transfers": []
+    }
 }

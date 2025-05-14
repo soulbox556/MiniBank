@@ -77,7 +77,7 @@ class BankAccount:
     def check_balance(self):
         pr.success(f"Current balance is €{self.balance:.2f}.")
 
-    def transfer(self, amount, recipient_account):
+    def transfer(self, amount, recipient_account, sender_username, bank_system):
         if amount > self.balance:
             pr.error("Insufficient funds.")
         elif amount > 500:
@@ -89,6 +89,15 @@ class BankAccount:
                          f"From: {self.account_number}, To: {recipient_account.account_number}, Amount: {amount}")
             pr.success(
                 f"Transferred €{amount:.2f} to account {recipient_account.account_number}. New balance is €{self.balance:.2f}.")
+            # Save transfer to JSON
+            transfer_data = {
+                "from": self.account_number,
+                "to": recipient_account.account_number,
+                "amount": amount,
+                "timestamp": datetime.now().isoformat()
+            }
+            bank_system.users[sender_username]["transfers"].append(transfer_data)
+            bank_system.save_users_to_file()
 
 
 class BankSystem:
@@ -122,10 +131,17 @@ class BankSystem:
         mm = f"{datetime.now().month:02d}"
         return f"{cc}_{name_part}_{acc_num}_{amount}_{mm}"
 
-    def create_account(self, username, account_name, initial_balance=0):
+    def create_account(self, username, account_name, initial_balance=0, save=True):
         if username not in self.users:
             pr.warning("User not found.")
             return
+        
+        # Check if the user already has an account with the same name
+        for acc_num in self.get_user_accounts(username):
+            acc = self.accounts.get(acc_num)
+            if acc and acc.account_name.lower() == account_name.lower():
+                pr.error("You already have an account with this name.")
+                return
 
         account_number = self._generate_account_number(
             account_name, initial_balance)
@@ -133,6 +149,16 @@ class BankSystem:
             account_number, account_name, initial_balance)
         self.accounts[account_number] = new_account
         self._add_user_account(username, account_number)
+        # Save account info to users.json
+        account_data = {
+            "account_number": account_number,
+            "account_name": account_name,
+            "balance": initial_balance
+        }
+        self.users[username]["accounts"].append(account_data)
+        if save:
+            self.save_users_to_file()
+
         log_activity("Account created", username,
                      f"Account Number: {account_number}, Initial Balance: {initial_balance}")
         pr.success(
@@ -158,7 +184,7 @@ class BankSystem:
             pr.success(
                 f"Account {acc_num}: {account.account_name} - €{account.balance:.2f}")
 
-    def create_user(self, username, password):
+    def create_user(self, username, password, save):
         if not username or not password:
             pr.error("Username and password cannot be empty.")
             return
@@ -166,15 +192,25 @@ class BankSystem:
             pr.error("Username already exists.")
             return
         hashed_pw = hashlib.sha256(password.encode()).hexdigest()
-        self.users[username] = hashed_pw
-        self.save_users_to_file()
+        self.users[username] = {
+            "password": hashed_pw,
+            "accounts": [],
+            "transfers": []
+        }
+        if save:
+            self.save_users_to_file()
         log_activity("User registered", username)
         pr.success(f"User {username} created.")
+
+    def delete_user(self, username):
+        if username in self.users:
+            del self.users[username]
+            self.save_users_to_file()
 
     def authenticate_user(self, username, password):
         if username in self.users:
             hashed_pw = hashlib.sha256(password.encode()).hexdigest()
-            return self.users[username] == hashed_pw
+            return self.users[username]["password"] == hashed_pw
         return False
 
 
@@ -226,6 +262,19 @@ def login_page(bank):
     if bank.authenticate_user(username, password):
         pr.success(f"Welcome {username}!")
         log_activity("User login", username)
+        # Load accounts from JSON
+        user_data = bank.users[username]
+        for acc in user_data.get("accounts", []):
+            account_number = acc["account_number"]
+            account_name = acc["account_name"]
+            balance = acc["balance"]
+
+            # Create BankAccount object and store in bank.accounts
+            account = BankAccount(account_number, account_name, balance)
+            bank.accounts[account_number] = account
+
+            # Also track account numbers for this user
+            bank._add_user_account(username, account_number)
         return username
     pr.error("Invalid credentials.")
     return None
@@ -262,7 +311,7 @@ def register_page(bank):
         pr.error("Passwords do not match.")
         return None
 
-    bank.create_user(username, password)
+    bank.create_user(username, password, True)
     pr.success(f"User {username} registered successfully!")
     return username
 
@@ -352,7 +401,7 @@ def main_menu(bank, username):
                     if amount == 0:
                         pr.warning("Transfer cancelled.")
                         continue
-                    sender.transfer(amount, recipient)
+                    sender.transfer(amount, recipient, username, bank)
                 else:
                     pr.error("Recipient account not found.")
             else:
