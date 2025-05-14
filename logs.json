@@ -1384,5 +1384,113 @@
         "username": "Wallet",
         "action": "Transfer",
         "details": "From: 05_WALLET_______________10000_00030000_05, To: 05_WALLET_______________10001_00010000_05, Amount: 100"
+    },
+    {
+        "timestamp": "2025-05-14T11:52:42.053611",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-14T11:52:44.394017",
+        "username": "admin",
+        "action": "User logout",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-14T11:52:48.140911",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-14T13:36:23.265894",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-14T13:36:43.595276",
+        "username": "admin",
+        "action": "Bill Payment",
+        "details": "Paid \u20ac50.00 to The Bright Light Electric Company (EC) from account 05_TEST_________________10000_00050000_05"
+    },
+    {
+        "timestamp": "2025-05-14T13:43:35.908224",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-14T13:44:36.129586",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-14T13:46:13.005707",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-14T13:47:53.952697",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-14T13:48:23.662275",
+        "username": "admin",
+        "action": "Bill Payment",
+        "details": "Paid \u20ac200.00 to Credit Card Company Q (CQ) from account 05_TEST_________________10000_00050000_05"
+    },
+    {
+        "timestamp": "2025-05-14T13:50:03.103758",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-14T13:50:06.273741",
+        "username": "admin",
+        "action": "User logout",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-14T13:50:15.546263",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-14T13:50:17.614931",
+        "username": "admin",
+        "action": "User logout",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-14T13:50:20.440557",
+        "username": "SYSTEM",
+        "action": "Application exit",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-14T13:50:32.376781",
+        "username": "admin2",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-14T13:50:48.553916",
+        "username": "admin2",
+        "action": "User logout",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-14T13:50:55.042942",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
     }
 ]

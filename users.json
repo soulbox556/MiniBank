@@ -20,6 +20,26 @@
                 "amount": 200.0,
                 "timestamp": "2025-05-14T10:05:02.835870"
             }
+        ],
+        "bills": [
+            {
+                "from": "05_TEST_________________10000_00050000_05",
+                "company": "The Bright Light Electric Company (EC)",
+                "amount": 100.0,
+                "timestamp": "2025-05-14T13:44:43.567670"
+            },
+            {
+                "from": "05_TEST_________________10000_00050000_05",
+                "company": "The Bright Light Electric Company (EC)",
+                "amount": 200.0,
+                "timestamp": "2025-05-14T13:46:18.999625"
+            },
+            {
+                "from": "05_TEST_________________10000_00050000_05",
+                "company": "Credit Card Company Q (CQ)",
+                "amount": 200.0,
+                "timestamp": "2025-05-14T13:48:23.662235"
+            }
         ]
     },
     "lindi": {
@@ -31,6 +51,11 @@
                 "balance": 10000.0
             }
         ],
+        "transfers": []
+    },
+    "admin2": {
+        "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "accounts": [],
         "transfers": []
     }
 }

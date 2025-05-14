@@ -65,8 +65,8 @@ class BankAccount:
     def withdraw(self, amount):
         if amount > self.balance:
             pr.error("Insufficient funds.")
-        elif amount > 1000:
-            pr.error("Max withdrawal amount is 1000€.")
+        elif amount > 500:
+            pr.error("Max withdrawal amount is 500€.")
         else:
             self.balance -= amount
             log_activity("Withdraw", self.account_name,
@@ -80,8 +80,8 @@ class BankAccount:
     def transfer(self, amount, recipient_account, sender_username, bank_system):
         if amount > self.balance:
             pr.error("Insufficient funds.")
-        elif amount > 500:
-            pr.error("Max transfer amount is 500€.")
+        elif amount > 1000:
+            pr.error("Max transfer amount is 1000€.")
         else:
             self.balance -= amount
             recipient_account.balance += amount
@@ -98,6 +98,49 @@ class BankAccount:
             }
             bank_system.users[sender_username]["transfers"].append(transfer_data)
             bank_system.save_users_to_file()
+
+    def pay_bill(self, company, amount, bank_system, username):
+        allowed_companies = {
+            "EC": "The Bright Light Electric Company (EC)",
+            "CQ": "Credit Card Company Q (CQ)",
+            "FI": "Fast Internet, Inc. (FI)"
+        }
+
+        if company not in allowed_companies:
+            pr.error("Company not recognized. Must be EC, CQ, or FI.")
+            return False
+
+        if amount > 2000:
+            pr.error("Cannot pay more than €2000 in a single session.")
+            return False
+
+        if self.balance - amount < 0:
+            pr.error("Insufficient funds to pay the bill.")
+            return False
+
+        self.balance -= amount
+        timestamp = datetime.now().isoformat()
+
+        # Save to logs.json
+        log_activity("Bill Payment", username,
+                     f"Paid {amount:.2f} to {allowed_companies[company]} from account {self.account_number}")
+
+        # Save in users.json
+        if "bills" not in bank_system.users[username]:
+            bank_system.users[username]["bills"] = []
+        bank_system.users[username]["bills"].append({
+            "from": self.account_number,
+            "company": allowed_companies[company],
+            "amount": amount,
+            "timestamp": timestamp
+        })
+
+        bank_system.save_users_to_file()
+
+        pr.success(
+            f"Successfully paid €{amount:.2f} to {allowed_companies[company]}. New balance: €{self.balance:.2f}")
+        return True
+
 
 
 class BankSystem:
@@ -325,9 +368,10 @@ def main_menu(bank, username):
         pr.menu("4. Check Balance")
         pr.menu("5. Transfer Funds")
         pr.menu("6. My Accounts")
-        pr.menu("7. Logout")
+        pr.menu("7. Pay Bill")
+        pr.menu("8. Logout")
 
-        choice = input("Choose option (1-7): ")
+        choice = input("Choose option (1-8): ")
 
         if choice == "1":
             pr.menu("Enter 0 to go back.")
@@ -412,6 +456,31 @@ def main_menu(bank, username):
             bank.list_user_accounts(username)
 
         elif choice == "7":
+            pr.menu("Enter 0 to go back.")
+            acc_num = input("Enter your account number: ").strip()
+            if acc_num == "0":
+                continue
+            account = bank.get_account(acc_num)
+            if not account or acc_num not in bank.get_user_accounts(username):
+                pr.error("Invalid account number or not your account.")
+                continue
+
+            pr.menu("Available companies: EC, CQ, FI")
+            company = input("Enter company code (EC, CQ, FI): ").strip().upper()
+            if company == "0":
+                continue
+
+            amount = validate_positive_number("Enter amount to pay: ")
+            if amount == 0:
+                pr.warning("Cancelled bill payment.")
+                continue
+
+            success = account.pay_bill(company, amount, bank, username)
+            if success:
+                # Optionally track session total if needed in-memory
+                pass
+
+        elif choice == "8":
             pr.warning("Logging out...")
             log_activity("User logout", username)
             break
