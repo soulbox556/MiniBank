@@ -1528,5 +1528,377 @@
         "username": "admin",
         "action": "Account created",
         "details": "Account Number: 05_TEST_________________10001_00010000_05, Initial Balance: 100.0"
+    },
+    {
+        "timestamp": "2025-05-14T15:42:13.737149",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-14T15:42:56.747020",
+        "username": "admin",
+        "action": "Bill Payment",
+        "details": "Paid 30.00 to Fast Internet, Inc. (FI) from account 05_LINDI________________10000_00050000_05"
+    },
+    {
+        "timestamp": "2025-05-17T14:13:17.657736",
+        "username": "test",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:13:20.683775",
+        "username": "test",
+        "action": "User logout",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:14:14.595250",
+        "username": "testuser",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:14:14.622706",
+        "username": "testuser",
+        "action": "Account created",
+        "details": "Account Number: 05_PRIMARY______________10000_00010000_05, Initial Balance: 100"
+    },
+    {
+        "timestamp": "2025-05-17T14:14:14.945819",
+        "username": "deposituser",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:14:15.029467",
+        "username": "deposituser",
+        "action": "Account created",
+        "details": "Account Number: 05_SAVINGS______________10000_00010000_05, Initial Balance: 100"
+    },
+    {
+        "timestamp": "2025-05-17T14:14:15.198809",
+        "username": "Savings",
+        "action": "Deposit",
+        "details": "Account: 05_SAVINGS______________10000_00010000_05, Amount: 50"
+    },
+    {
+        "timestamp": "2025-05-17T14:14:15.261932",
+        "username": "alice",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:14:15.301809",
+        "username": "bob",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:14:15.370372",
+        "username": "alice",
+        "action": "Account created",
+        "details": "Account Number: 05_WALLET_______________10000_00030000_05, Initial Balance: 300"
+    },
+    {
+        "timestamp": "2025-05-17T14:14:15.456939",
+        "username": "bob",
+        "action": "Account created",
+        "details": "Account Number: 05_WALLET_______________10001_00010000_05, Initial Balance: 100"
+    },
+    {
+        "timestamp": "2025-05-17T14:14:15.558052",
+        "username": "Wallet",
+        "action": "Transfer",
+        "details": "From: 05_WALLET_______________10000_00030000_05, To: 05_WALLET_______________10001_00010000_05, Amount: 100"
+    },
+    {
+        "timestamp": "2025-05-17T14:14:19.765590",
+        "username": "testuser",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:14:19.811711",
+        "username": "testuser",
+        "action": "Account created",
+        "details": "Account Number: 05_PRIMARY______________10000_00010000_05, Initial Balance: 100"
+    },
+    {
+        "timestamp": "2025-05-17T14:14:19.884035",
+        "username": "deposituser",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:14:20.138592",
+        "username": "deposituser",
+        "action": "Account created",
+        "details": "Account Number: 05_SAVINGS______________10000_00010000_05, Initial Balance: 100"
+    },
+    {
+        "timestamp": "2025-05-17T14:14:20.211456",
+        "username": "Savings",
+        "action": "Deposit",
+        "details": "Account: 05_SAVINGS______________10000_00010000_05, Amount: 50"
+    },
+    {
+        "timestamp": "2025-05-17T14:14:20.290574",
+        "username": "alice",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:14:20.347537",
+        "username": "bob",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:14:20.407847",
+        "username": "alice",
+        "action": "Account created",
+        "details": "Account Number: 05_WALLET_______________10000_00030000_05, Initial Balance: 300"
+    },
+    {
+        "timestamp": "2025-05-17T14:14:20.462519",
+        "username": "bob",
+        "action": "Account created",
+        "details": "Account Number: 05_WALLET_______________10001_00010000_05, Initial Balance: 100"
+    },
+    {
+        "timestamp": "2025-05-17T14:14:20.503916",
+        "username": "Wallet",
+        "action": "Transfer",
+        "details": "From: 05_WALLET_______________10000_00030000_05, To: 05_WALLET_______________10001_00010000_05, Amount: 100"
+    },
+    {
+        "timestamp": "2025-05-17T14:14:56.839293",
+        "username": "test",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:15:12.205256",
+        "username": "test",
+        "action": "User logout",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:15:37.036071",
+        "username": "test",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:15:41.748406",
+        "username": "test",
+        "action": "User logout",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:16:05.969899",
+        "username": "SYSTEM",
+        "action": "Application exit",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:16:27.270656",
+        "username": "test",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:16:48.400862",
+        "username": "test",
+        "action": "User logout",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:17:01.743406",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:17:05.078064",
+        "username": "admin",
+        "action": "User logout",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:17:08.317027",
+        "username": "test",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:17:42.410025",
+        "username": "test",
+        "action": "User logout",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:18:12.071637",
+        "username": "test",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:18:37.226682",
+        "username": "test",
+        "action": "Account created",
+        "details": "Account Number: 05_BURIM________________10000_02000000_05, Initial Balance: 20000.0"
+    },
+    {
+        "timestamp": "2025-05-17T14:20:29.026568",
+        "username": "test",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:21:55.277313",
+        "username": "test",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:23:02.303795",
+        "username": "test",
+        "action": "User logout",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:23:09.365370",
+        "username": "SYSTEM",
+        "action": "Application exit",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:30:47.081658",
+        "username": "testuser",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:30:47.090243",
+        "username": "testuser",
+        "action": "Account created",
+        "details": "Account Number: 05_PRIMARY______________10000_00010000_05, Initial Balance: 100"
+    },
+    {
+        "timestamp": "2025-05-17T14:30:47.102656",
+        "username": "deposituser",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:30:47.110534",
+        "username": "deposituser",
+        "action": "Account created",
+        "details": "Account Number: 05_SAVINGS______________10000_00010000_05, Initial Balance: 100"
+    },
+    {
+        "timestamp": "2025-05-17T14:30:47.119114",
+        "username": "Savings",
+        "action": "Deposit",
+        "details": "Account: 05_SAVINGS______________10000_00010000_05, Amount: 50"
+    },
+    {
+        "timestamp": "2025-05-17T14:30:47.130175",
+        "username": "alice",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:30:47.138795",
+        "username": "bob",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:30:47.147787",
+        "username": "alice",
+        "action": "Account created",
+        "details": "Account Number: 05_WALLET_______________10000_00030000_05, Initial Balance: 300"
+    },
+    {
+        "timestamp": "2025-05-17T14:30:47.156639",
+        "username": "bob",
+        "action": "Account created",
+        "details": "Account Number: 05_WALLET_______________10001_00010000_05, Initial Balance: 100"
+    },
+    {
+        "timestamp": "2025-05-17T14:30:47.166520",
+        "username": "Wallet",
+        "action": "Transfer",
+        "details": "From: 05_WALLET_______________10000_00030000_05, To: 05_WALLET_______________10001_00010000_05, Amount: 100"
+    },
+    {
+        "timestamp": "2025-05-17T14:31:40.626976",
+        "username": "SYSTEM",
+        "action": "Application exit",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:31:44.716705",
+        "username": "testuser",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:31:44.728504",
+        "username": "testuser",
+        "action": "Account created",
+        "details": "Account Number: 05_PRIMARY______________10000_00010000_05, Initial Balance: 100"
+    },
+    {
+        "timestamp": "2025-05-17T14:31:44.741243",
+        "username": "deposituser",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:31:44.750205",
+        "username": "deposituser",
+        "action": "Account created",
+        "details": "Account Number: 05_SAVINGS______________10000_00010000_05, Initial Balance: 100"
+    },
+    {
+        "timestamp": "2025-05-17T14:31:44.760066",
+        "username": "Savings",
+        "action": "Deposit",
+        "details": "Account: 05_SAVINGS______________10000_00010000_05, Amount: 50"
+    },
+    {
+        "timestamp": "2025-05-17T14:31:44.779896",
+        "username": "alice",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:31:44.792526",
+        "username": "bob",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-17T14:31:44.802943",
+        "username": "alice",
+        "action": "Account created",
+        "details": "Account Number: 05_WALLET_______________10000_00030000_05, Initial Balance: 300"
+    },
+    {
+        "timestamp": "2025-05-17T14:31:44.821355",
+        "username": "bob",
+        "action": "Account created",
+        "details": "Account Number: 05_WALLET_______________10001_00010000_05, Initial Balance: 100"
+    },
+    {
+        "timestamp": "2025-05-17T14:31:44.833277",
+        "username": "Wallet",
+        "action": "Transfer",
+        "details": "From: 05_WALLET_______________10000_00030000_05, To: 05_WALLET_______________10001_00010000_05, Amount: 100"
     }
 ]

@@ -39,6 +39,12 @@
                 "company": "Credit Card Company Q (CQ)",
                 "amount": 200.0,
                 "timestamp": "2025-05-14T13:48:23.662235"
+            },
+            {
+                "from": "05_LINDI________________10000_00050000_05",
+                "company": "Fast Internet, Inc. (FI)",
+                "amount": 30.0,
+                "timestamp": "2025-05-14T15:42:56.746720"
             }
         ]
     },
@@ -56,6 +62,17 @@
     "admin2": {
         "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
         "accounts": [],
+        "transfers": []
+    },
+    "test": {
+        "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "accounts": [
+            {
+                "account_number": "05_BURIM________________10000_02000000_05",
+                "account_name": "Burim",
+                "balance": 20000.0
+            }
+        ],
         "transfers": []
     }
 }

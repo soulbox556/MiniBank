@@ -23,6 +23,7 @@
 #   3. Add Integration testings
 #   4. Add Pay Bills
 #   5. Add Delete Account
+# v.1.9.1 - Need: ADMIN and Standard User / Account Number for user
 # -----------------------------------------------------------------------------------
 import hashlib
 import json
@@ -103,7 +104,8 @@ class BankAccount:
                 "amount": amount,
                 "timestamp": datetime.now().isoformat()
             }
-            bank_system.users[sender_username]["transfers"].append(transfer_data)
+            bank_system.users[sender_username]["transfers"].append(
+                transfer_data)
             bank_system.save_users_to_file()
 
     def pay_bill(self, company, amount, bank_system, username):
@@ -149,7 +151,6 @@ class BankAccount:
         return True
 
 
-
 class BankSystem:
     def __init__(self):
         self.accounts = {}
@@ -185,7 +186,7 @@ class BankSystem:
         if username not in self.users:
             pr.warning("User not found.")
             return
-        
+
         # Check if the user already has an account with the same name
         for acc_num in self.get_user_accounts(username):
             acc = self.accounts.get(acc_num)
@@ -270,8 +271,9 @@ class BankSystem:
 
         # Find and remove account from user's account list
         user_accounts = self.users[username].get("accounts", [])
-        updated_accounts = [acc for acc in user_accounts if acc["account_number"] != account_number]
-        
+        updated_accounts = [
+            acc for acc in user_accounts if acc["account_number"] != account_number]
+
         if len(user_accounts) == len(updated_accounts):
             pr.error("Account number not found under your profile.")
             return
@@ -289,8 +291,10 @@ class BankSystem:
             ]
 
         self.save_users_to_file()
-        log_activity("Account deleted", username, f"Account Number: {account_number}")
+        log_activity("Account deleted", username,
+                     f"Account Number: {account_number}")
         pr.success(f"Account {account_number} deleted successfully.")
+
 
 def validate_positive_number(prompt):
     while True:
@@ -502,7 +506,8 @@ def main_menu(bank, username):
                 continue
 
             pr.menu("Available companies: EC, CQ, FI")
-            company = input("Enter company code (EC, CQ, FI): ").strip().upper()
+            company = input(
+                "Enter company code (EC, CQ, FI): ").strip().upper()
             if company == "0":
                 continue
 
