@@ -1900,5 +1900,71 @@
         "username": "Wallet",
         "action": "Transfer",
         "details": "From: 05_WALLET_______________10000_00030000_05, To: 05_WALLET_______________10001_00010000_05, Amount: 100"
+    },
+    {
+        "timestamp": "2025-05-24T11:14:53.329619",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:15:50.557942",
+        "username": "admin",
+        "action": "Plan changed",
+        "details": "Account: 05_LINDI________________10000_00050000_05, New Plan: SP"
+    },
+    {
+        "timestamp": "2025-05-24T11:15:56.579942",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:16:24.529026",
+        "username": "Majlind",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:17:16.296845",
+        "username": "Majlind",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:17:20.889059",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:17:39.384710",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:17:48.085095",
+        "username": "Majlind",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:20:34.670329",
+        "username": "Majlind",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:20:38.314896",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:21:22.537227",
+        "username": "admin",
+        "action": "Account disabled",
+        "details": "Account: 05_LINDI________________10000_00050000_05"
     }
 ]

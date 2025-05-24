@@ -5,7 +5,9 @@
             {
                 "account_number": "05_LINDI________________10000_00050000_05",
                 "account_name": "lindi",
-                "balance": 500.0
+                "balance": 500.0,
+                "plan": "SP",
+                "disabled": true
             },
             {
                 "account_number": "05_TEST_________________10001_00010000_05",
@@ -74,5 +76,11 @@
             }
         ],
         "transfers": []
+    },
+    "Majlind": {
+        "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "accounts": [],
+        "transfers": [],
+        "bills": []
     }
 }
