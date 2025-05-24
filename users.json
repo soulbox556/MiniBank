@@ -13,6 +13,13 @@
                 "account_number": "05_TEST_________________10001_00010000_05",
                 "account_name": "test",
                 "balance": 100.0
+            },
+            {
+                "account_number": "05TESTTTXXXXXXXXXXXXXX100000001000005",
+                "account_name": "Testtt",
+                "balance": 100.0,
+                "disabled": false,
+                "plan": "SP"
             }
         ],
         "transfers": [
@@ -78,6 +85,18 @@
         "transfers": []
     },
     "Majlind": {
+        "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "accounts": [],
+        "transfers": [],
+        "bills": []
+    },
+    "testt": {
+        "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "accounts": [],
+        "transfers": [],
+        "bills": []
+    },
+    "Fatmir": {
         "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
         "accounts": [],
         "transfers": [],

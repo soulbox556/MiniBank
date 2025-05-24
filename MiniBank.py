@@ -246,7 +246,8 @@ class BankSystem:
 
     def _generate_account_number(self, account_name, initial_balance):
         cc = "05"
-        name_part = account_name.upper().replace(" ", "")[:20].ljust(20, "")
+        name_part = account_name.upper().replace(" ", "")[:20].ljust(
+            20, "X")  # Changed to use "X" as fill character
         acc_num = f"{self.account_counter:05d}"
         self.account_counter += 1
         amount = f"{int(initial_balance * 100):08d}"

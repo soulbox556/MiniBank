@@ -1966,5 +1966,125 @@
         "username": "admin",
         "action": "Account disabled",
         "details": "Account: 05_LINDI________________10000_00050000_05"
+    },
+    {
+        "timestamp": "2025-05-24T11:31:12.906449",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:31:53.469825",
+        "username": "admin2",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:32:03.126234",
+        "username": "admin2",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:32:06.945892",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:33:27.578643",
+        "username": "testt",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:33:31.693769",
+        "username": "testt",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:33:35.845873",
+        "username": "testt",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:33:50.903264",
+        "username": "testt",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:33:55.507786",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:33:58.980096",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:34:10.582174",
+        "username": "Fatmir",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:35:12.455096",
+        "username": "Fatmir",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:35:18.152708",
+        "username": "testt",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:35:47.375250",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:36:12.960264",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:36:20.023559",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:36:28.806768",
+        "username": "testt",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:40:33.887720",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:40:48.084989",
+        "username": "admin",
+        "action": "Account created",
+        "details": "Account Number: 05TESTTTXXXXXXXXXXXXXX100000001000005, Initial Balance: 100.0"
+    },
+    {
+        "timestamp": "2025-05-24T11:41:44.074151",
+        "username": "Testtt",
+        "action": "Deposit",
+        "details": "Account: 05TESTTTXXXXXXXXXXXXXX100000001000005, Amount: 400.0"
     }
 ]
