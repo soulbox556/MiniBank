@@ -23,7 +23,7 @@
 #   3. Add Integration testings
 #   4. Add Pay Bills
 #   5. Add Delete Account
-# v.1.9.1 - Need: ADMIN and Standard User / Account Number for user
+# v.1.10 changed to Albanian Language | Lendrit changed - Majlind / Ertan reviewed code
 # -----------------------------------------------------------------------------------
 import hashlib
 import json
@@ -57,7 +57,7 @@ def log_activity(action, username=None, details=None):
 
 
 class BankAccount:
-    def __init__(self, account_number, account_name, balance=0):
+    def _init_(self, account_number, account_name, balance=0):
         self.account_number = account_number
         self.account_name = account_name
         self.balance = balance
@@ -68,35 +68,36 @@ class BankAccount:
         log_activity("Deposit", self.account_name,
                      f"Account: {self.account_number}, Amount: {amount}")
         pr.success(
-            f"Deposited €{amount:.2f}. New balance is €{self.balance:.2f}.")
+            f"Deponuar €{amount:.2f}. Balanca e re eshte €{self.balance:.2f}.")
 
     def withdraw(self, amount):
         if amount > self.balance:
-            pr.error("Insufficient funds.")
+            pr.error("Nuk ka mjete te mjaftueshme.")
         elif amount > 500:
-            pr.error("Max withdrawal amount is 500€.")
+            # duhet me u bo brenda sessionit
+            pr.error("Eshte arritur limiti maksimal prej 500€.")
         else:
             self.balance -= amount
             log_activity("Withdraw", self.account_name,
                          f"Account: {self.account_number}, Amount: {amount}")
             pr.success(
-                f"Withdrew €{amount:.2f}. New balance is €{self.balance:.2f}.")
+                f"Shuma e terhequr €{amount:.2f}. Balanci i ri eshte €{self.balance:.2f}.")
 
     def check_balance(self):
-        pr.success(f"Current balance is €{self.balance:.2f}.")
+        pr.success(f"Balanci aktual eshte €{self.balance:.2f}.")
 
     def transfer(self, amount, recipient_account, sender_username, bank_system):
         if amount > self.balance:
-            pr.error("Insufficient funds.")
+            pr.error("Nuk ka mjete te mjaftueshme.")
         elif amount > 1000:
-            pr.error("Max transfer amount is 1000€.")
+            pr.error("Eshte arritur transferi maksimal prej 1000€.")
         else:
             self.balance -= amount
             recipient_account.balance += amount
             log_activity("Transfer", self.account_name,
                          f"From: {self.account_number}, To: {recipient_account.account_number}, Amount: {amount}")
             pr.success(
-                f"Transferred €{amount:.2f} to account {recipient_account.account_number}. New balance is €{self.balance:.2f}.")
+                f"Shuma e transferuar €{amount:.2f} ne llogarine {recipient_account.account_number}. Balanci i ri eshte €{self.balance:.2f}.")
             # Save transfer to JSON
             transfer_data = {
                 "from": self.account_number,
@@ -116,15 +117,15 @@ class BankAccount:
         }
 
         if company not in allowed_companies:
-            pr.error("Company not recognized. Must be EC, CQ, or FI.")
+            pr.error("Kompani e pa njohur. Duhet te jete EC, CQ, ose FI.")
             return False
 
         if amount > 2000:
-            pr.error("Cannot pay more than €2000 in a single session.")
+            pr.error("Nuk mund te paguani me shume se shuma €2000 ne nje sesion.")
             return False
 
         if self.balance - amount < 0:
-            pr.error("Insufficient funds to pay the bill.")
+            pr.error("Nuk ka mjete te mjaftueshme per te paguar faturen.")
             return False
 
         self.balance -= amount
@@ -147,12 +148,12 @@ class BankAccount:
         bank_system.save_users_to_file()
 
         pr.success(
-            f"Successfully paid €{amount:.2f} to {allowed_companies[company]}. New balance: €{self.balance:.2f}")
+            f"Me sukses eshte paguar shuma prej €{amount:.2f} ne {allowed_companies[company]}. Balanci i ri: €{self.balance:.2f}")
         return True
 
 
 class BankSystem:
-    def __init__(self):
+    def _init_(self):
         self.accounts = {}
         self.users = self.load_users_from_file()
         self.user_accounts = {}
@@ -175,23 +176,23 @@ class BankSystem:
 
     def _generate_account_number(self, account_name, initial_balance):
         cc = "05"
-        name_part = account_name.upper().replace(" ", "_")[:20].ljust(20, "_")
+        name_part = account_name.upper().replace(" ", "")[:20].ljust(20, "")
         acc_num = f"{self.account_counter:05d}"
         self.account_counter += 1
         amount = f"{int(initial_balance * 100):08d}"
         mm = f"{datetime.now().month:02d}"
-        return f"{cc}_{name_part}_{acc_num}_{amount}_{mm}"
+        return f"{cc}{name_part}{acc_num}{amount}{mm}"
 
     def create_account(self, username, account_name, initial_balance=0, save=True):
         if username not in self.users:
-            pr.warning("User not found.")
+            pr.warning("Useri nuk eshte gjetur.")
             return
 
         # Check if the user already has an account with the same name
         for acc_num in self.get_user_accounts(username):
             acc = self.accounts.get(acc_num)
             if acc and acc.account_name.lower() == account_name.lower():
-                pr.error("You already have an account with this name.")
+                pr.error("Kjo llogari eshte ekzistuese.")
                 return
 
         account_number = self._generate_account_number(
@@ -213,7 +214,7 @@ class BankSystem:
         log_activity("Account created", username,
                      f"Account Number: {account_number}, Initial Balance: {initial_balance}")
         pr.success(
-            f"Account created successfully!\nYour new account number: {account_number}")
+            f"Llogaria juaj eshte krijuar me sukses!\nNumri i llogarise suaj eshte: {account_number}")
 
     def _add_user_account(self, username, account_number):
         if username not in self.user_accounts:
@@ -228,19 +229,20 @@ class BankSystem:
 
     def list_user_accounts(self, username):
         if username not in self.user_accounts:
-            pr.warning("No accounts found.")
+            pr.warning("Nuk ka llogari ekzistuese.")
             return
         for acc_num in self.user_accounts[username]:
             account = self.accounts[acc_num]
             pr.success(
-                f"Account {acc_num}: {account.account_name} - €{account.balance:.2f}")
+                f"Llogaria {acc_num}: {account.account_name} - €{account.balance:.2f}")
 
     def create_user(self, username, password, save):
         if not username or not password:
-            pr.error("Username and password cannot be empty.")
+            pr.error(
+                "Emri i perdoruesit dhe fjalekalimi nuk duhet te jene te zbasura.")
             return
         if username in self.users:
-            pr.error("Username already exists.")
+            pr.error("Emri i perdoruesit eshte ekzistues.")
             return
         hashed_pw = hashlib.sha256(password.encode()).hexdigest()
         self.users[username] = {
@@ -251,7 +253,7 @@ class BankSystem:
         if save:
             self.save_users_to_file()
         log_activity("User registered", username)
-        pr.success(f"User {username} created.")
+        pr.success(f"Perdoruesi {username} eshte krijuar me sukses.")
 
     def delete_user(self, username):
         if username in self.users:
@@ -266,7 +268,7 @@ class BankSystem:
 
     def delete_account(self, username, account_number):
         if username not in self.users:
-            pr.error("User not found.")
+            pr.error("Perdoruesi nuk ekziston.")
             return
 
         # Find and remove account from user's account list
@@ -275,7 +277,7 @@ class BankSystem:
             acc for acc in user_accounts if acc["account_number"] != account_number]
 
         if len(user_accounts) == len(updated_accounts):
-            pr.error("Account number not found under your profile.")
+            pr.error("Numri i llogarise nuk eshte gjendur ne llogarine tuaj.")
             return
 
         self.users[username]["accounts"] = updated_accounts
@@ -293,7 +295,7 @@ class BankSystem:
         self.save_users_to_file()
         log_activity("Account deleted", username,
                      f"Account Number: {account_number}")
-        pr.success(f"Account {account_number} deleted successfully.")
+        pr.success(f"Llogaria {account_number} eshte fshire me sukses.")
 
 
 def validate_positive_number(prompt):
@@ -301,48 +303,48 @@ def validate_positive_number(prompt):
         try:
             value = float(input(prompt))
             if value < 0:
-                pr.error("Amount must be positive.")
+                pr.error("Shuma duhet te jete pozitive.")
                 continue
             return value
         except ValueError:
-            pr.error("Invalid input. Please enter a number.")
+            pr.error("Vlera jo valide. Ju lutem shtypni nje numer.")
 
 
 def display_home_page():
-    pr.header("\n--- Welcome to Mini Bank ---")
-    pr.header("\n--- This was created for base for Master AAB Project ---")
-    pr.header("\n--- students for this project are: \nStudent: Fatmir Hasani - Frontend / Product Analyst\nStudent: Lendrit Berisha - Frontend / Product Analyst\nStudent: Majlind Avdylaj - Lead Programmer / Test\nStudent: Ertan Iliyaz - Backend programmer / Documentation\nMentor: Prof. Ass. Dr. Ramadan Dervishi (Product Owner)\n---")
-    pr.menu("1. Login")
-    pr.menu("2. Register")
-    pr.menu("3. Exit")
+    pr.header("\n--- Mireservini ne Mini Bank ---")
+    pr.header("\n--- Ky projekt eshte krijuar per fakulltetin Master - AAB ---")
+    pr.header("\n--- Studentet pjesemarres ne projekt jane: \nStudenti: Fatmir Hasani - Frontend / Product Analyst\nStudenti: Lendrit Berisha - Frontend / Product Analyst\nStudenti: Majlind Avdylaj - Lead Programmer / Test\nStudenti: Ertan Iliyaz - Backend programmer / Documentation\nMentor: Prof. Ass. Dr. Ramadan Dervishi (Product Owner)\n---")
+    pr.menu("1. Kycu")
+    pr.menu("2. Regjistrohu")
+    pr.menu("3. Dil")
 
     while True:
-        choice = input("Choose option (1-3): ")
+        choice = input("Zgjedhni nje opsion (1-3): ")
 
         if choice == "1":
             return "login"
         elif choice == "2":
             return "register"
         elif choice == "3":
-            pr.warning("Exiting application.")
+            pr.warning("Duke dalur nga aplikacioni.")
             log_activity("Application exit")
             return "exit"
-        pr.error("Invalid choice.")
+        pr.error("Zgjedhje invalide.")
 
 
 def login_page(bank):
-    pr.header("\n--- Login ---")
-    pr.menu("Enter 0 to go back.")
-    username = input("Username: ").strip()
+    pr.header("\n--- Kycu ---")
+    pr.menu("Klikoni 0 per te shkuar mbrapa.")
+    username = input("Emri perdoruesit: ").strip()
     if username == "0":
         return None
 
-    password = pwinput.pwinput("Password: ").strip()
+    password = pwinput.pwinput("Fjalekalimi: ").strip()
     if password == "0":
         return None
 
     if bank.authenticate_user(username, password):
-        pr.success(f"Welcome {username}!")
+        pr.success(f"Mireservini {username}!")
         log_activity("User login", username)
         # Load accounts from JSON
         user_data = bank.users[username]
@@ -358,186 +360,190 @@ def login_page(bank):
             # Also track account numbers for this user
             bank._add_user_account(username, account_number)
         return username
-    pr.error("Invalid credentials.")
+    pr.error("Kredencialet gabim.")
     return None
 
 
 def register_page(bank):
-    pr.header("\n--- Register ---")
-    pr.menu("Enter 0 to go back.")
-    username = input("Enter new username: ").strip()
+    pr.header("\n--- Regjistrohu ---")
+    pr.menu("Klikoni 0 per te shkuar mbrapa.")
+    username = input("Shkruani nje emer perdoruesi: ").strip()
     if username == "0":
         return None
 
     if not username:
-        pr.error("Username cannot be empty.")
+        pr.error("Emri i perdoruesit nuk duhet te jete i zbrasur.")
         return None
 
     if username in bank.users:
-        pr.error("Username already exists.")
+        pr.error("Ky emer perdoruesi ekziston.")
         return None
 
-    password = pwinput.pwinput("Enter password: ").strip()
+    password = pwinput.pwinput("Shkruani fjalekalimin: ").strip()
     if password == "0":
         return None
 
     if not password:
-        pr.error("Password cannot be empty.")
+        pr.error("Fjalekalimi nuk duhet te jete i zbrasur.")
         return None
 
-    confirm_password = pwinput.pwinput("Confirm password: ").strip()
+    confirm_password = pwinput.pwinput("Fjalekalimi u konfirmua: ").strip()
     if confirm_password == "0":
         return None
 
     if password != confirm_password:
-        pr.error("Passwords do not match.")
+        pr.error("Fjalekalimet nuk pershtaten.")
         return None
 
     bank.create_user(username, password, True)
-    pr.success(f"User {username} registered successfully!")
+    pr.success(f"Useri {username} eshte regjistruar me sukses!")
     return username
 
 
 def main_menu(bank, username):
     while True:
-        pr.header("\n--- Main Menu ---")
-        pr.menu("1. Create Account")
-        pr.menu("2. Deposit")
-        pr.menu("3. Withdraw")
-        pr.menu("4. Check Balance")
-        pr.menu("5. Transfer Funds")
-        pr.menu("6. My Accounts")
-        pr.menu("7. Pay Bill")
-        pr.menu("8. Delete Account")
-        pr.menu("9. Logout")
+        pr.header("\n--- Menu kryesore ---")
+        pr.menu("1. Krijoni llogari")
+        pr.menu("2. Deponim")
+        pr.menu("3. Terheqje")
+        pr.menu("4. Kontrolloni balancen")
+        pr.menu("5. Transferimi i fondeve")
+        pr.menu("6. Llogaria ime")
+        pr.menu("7. Paguaj faturen")
+        pr.menu("8. Fshije llogarine")
+        pr.menu("9. Shkycu")
 
-        choice = input("Choose option (1-8): ")
+        choice = input("Zgjedhni opsionin (1-8): ")
 
         if choice == "1":
-            pr.menu("Enter 0 to go back.")
-            account_name = input("Enter account holder's name: ").strip()
+            pr.menu("Klikoni 0 per te shkruar mbrapa.")
+            account_name = input(
+                "Vendosni emrin e mbajtësit të llogarisë: ").strip()
             if account_name == "0":
                 continue
             initial_balance = validate_positive_number(
-                "Initial deposit amount (or 0 to cancel): ")
+                "Shkruani shumen per te deponuar (ose 0 per te anuluar): ")
             if initial_balance == 0:
-                pr.warning("Cancelled creating account.")
+                pr.warning("Krijimi i llogarise u anulua.")
                 continue
             bank.create_account(username, account_name, initial_balance)
 
         elif choice == "2":
-            pr.menu("Enter 0 to go back.")
-            acc_num = input("Enter account number: ").strip()
+            pr.menu("Klikoni 0 per te shkruar mbrapa.")
+            acc_num = input("Shkruani numrin e llogarise: ").strip()
             if acc_num == "0":
                 continue
             account = bank.get_account(acc_num)
             if account and acc_num in bank.get_user_accounts(username):
                 amount = validate_positive_number(
-                    "Deposit amount (or 0 to cancel): ")
+                    "Shuma e deponuar (ose 0 per anulim): ")
                 if amount == 0:
-                    pr.warning("Deposit cancelled.")
+                    pr.warning("Deponimi u anulua.")
                     continue
                 account.deposit(amount)
             else:
-                pr.error("Account not found or access denied.")
+                pr.error("Llogaria nuk u gjet ose qasja u refuzua.")
 
         elif choice == "3":
-            pr.menu("Enter 0 to go back.")
-            acc_num = input("Enter account number: ").strip()
+            pr.menu("Klikoni 0 per te shkruar mbrapa.")
+            acc_num = input("Shkruani numrin e llogarise: ").strip()
             if acc_num == "0":
                 continue
             account = bank.get_account(acc_num)
             if account and acc_num in bank.get_user_accounts(username):
                 amount = validate_positive_number(
-                    "Withdrawal amount (or 0 to cancel): ")
+                    "Shuma per terheqje (or 0 to cancel): ")
                 if amount == 0:
-                    pr.warning("Withdrawal cancelled.")
+                    pr.warning("Terheqja u anulua.")
                     continue
                 account.withdraw(amount)
             else:
-                pr.error("Account not found or access denied.")
+                pr.error("Llogaria nuk u gjet ose qasja u refuzua.")
 
         elif choice == "4":
-            pr.menu("Enter 0 to go back.")
-            acc_num = input("Enter account number: ").strip()
+            pr.menu("Klikoni 0 per te shkruar mbrapa.")
+            acc_num = input("Shkruani numrin e llogarise: ").strip()
             if acc_num == "0":
                 continue
             account = bank.get_account(acc_num)
             if account and acc_num in bank.get_user_accounts(username):
                 account.check_balance()
             else:
-                pr.error("Account not found or access denied.")
+                pr.error("Llogaria nuk u gjet ose qasja u refuzua.")
 
         elif choice == "5":
-            pr.menu("Enter 0 to go back.")
-            sender_acc = input("Your account number: ").strip()
+            pr.menu("Klikoni 0 per te shkruar mbrapa.")
+            sender_acc = input("Numri i llogarise: ").strip()
             if sender_acc == "0":
                 continue
             sender = bank.get_account(sender_acc)
             if sender and sender_acc in bank.get_user_accounts(username):
-                recipient_acc = input("Recipient account number: ").strip()
+                recipient_acc = input(
+                    "Numri i llogarise se marresit: ").strip()
                 if recipient_acc == "0":
                     continue
                 recipient = bank.get_account(recipient_acc)
                 if recipient:
                     amount = validate_positive_number(
-                        "Transfer amount (or 0 to cancel): ")
+                        "Shuma per transfer (ose 0 per anulim): ")
                     if amount == 0:
-                        pr.warning("Transfer cancelled.")
+                        pr.warning("Transferi u anulua.")
                         continue
                     sender.transfer(amount, recipient, username, bank)
                 else:
-                    pr.error("Recipient account not found.")
+                    pr.error("Llogaria e marresit nuk u gjend.")
             else:
-                pr.error("Invalid sender account.")
+                pr.error("Llogaria e derguesit nuk u gjend.")
 
         elif choice == "6":
-            pr.header("\n--- Your Accounts ---")
+            pr.header("\n--- Llogaria juaj ---")
             bank.list_user_accounts(username)
 
         elif choice == "7":
-            pr.menu("Enter 0 to go back.")
-            acc_num = input("Enter your account number: ").strip()
+            pr.menu("Klikoni 0 per t'u kthyer mbrapa.")
+            acc_num = input("Shkruani numrin e llogarise suaj: ").strip()
             if acc_num == "0":
                 continue
             account = bank.get_account(acc_num)
             if not account or acc_num not in bank.get_user_accounts(username):
-                pr.error("Invalid account number or not your account.")
+                pr.error("Llogaria nuk u gjet ose qasja u refuzua.")
                 continue
 
-            pr.menu("Available companies: EC, CQ, FI")
+            pr.menu("Kompanite e disponueshme: EC, CQ, FI")
             company = input(
-                "Enter company code (EC, CQ, FI): ").strip().upper()
+                "Shkruani kodin e kompanise (EC, CQ, FI): ").strip().upper()
             if company == "0":
                 continue
 
-            amount = validate_positive_number("Enter amount to pay: ")
+            amount = validate_positive_number(
+                "Shkruani shumen per te paguar: ")
             if amount == 0:
-                pr.warning("Cancelled bill payment.")
+                pr.warning("Pagesa e fatures u anulua.")
                 continue
 
             success = account.pay_bill(company, amount, bank, username)
             if success:
                 pass
         elif choice == "8":
-            pr.header("\n--- Your Accounts ---")
+            pr.header("\n--- Llogaria juaj ---")
             bank.list_user_accounts(username)
-            pr.menu("Enter 0 to go back.")
-            acc_num = input("Enter account number to delete: ").strip()
+            pr.menu("Shkruani 0 per t'u kthyer mbrapa.")
+            acc_num = input(
+                "Shkruani numrin e llogarise per ta fshire: ").strip()
             if acc_num == "0":
                 continue
             if acc_num not in bank.get_user_accounts(username):
-                pr.error("Account not found or access denied.")
+                pr.error("Llogaria nuk u gjet ose qasja u refuzua.")
                 continue
             bank.delete_account(username, acc_num)
 
         elif choice == "9":
-            pr.warning("Logging out...")
-            log_activity("User logout", username)
+            pr.warning("Duke u shkyqur...")
+            log_activity("Perdoruesi u shkyc", username)
             break
 
         else:
-            pr.error("Invalid choice.")
+            pr.error("Zgjedhje e gabuar.")
 
 
 def main():
