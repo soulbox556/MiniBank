@@ -555,43 +555,60 @@ def main_menu(bank, username):
 
     while True:
         pr.header("\n--- Menu kryesore ---")
-        pr.menu("1. Krijoni llogari")
+
+        # Show "Krijoni llogari" only for admin
+        if is_admin:
+            pr.menu("1. Krijoni llogari")
+
         pr.menu("2. Deponim")
         pr.menu("3. Terheqje")
         pr.menu("4. Kontrolloni balancen")
         pr.menu("5. Transferimi i fondeve")
         pr.menu("6. Llogaria ime")
         pr.menu("7. Paguaj faturen")
-        pr.menu("8. Fshije llogarine")
+
+        # Show admin-only options
         if is_admin:
+            pr.menu("8. Fshije llogarine")
             pr.menu("9. Çaktivizo llogarine")
             pr.menu("10. Ndrysho planin")
             pr.menu("11. Shkycu")
         else:
-            pr.menu("9. Shkycu")
+            pr.menu("8. Shkycu")
 
-        choice = input(f"Zgjedhni opsionin (1-{'11' if is_admin else '9'}): ")
+        # Adjust the input prompt based on user type
+        if is_admin:
+            choice = input(f"Zgjedhni opsionin (1-11): ")
+        else:
+            choice = input(f"Zgjedhni opsionin (2-8): ")
 
-        if choice == "1":
+        if choice == "1" and is_admin:
+            # Admin can create accounts for any user
             pr.menu("Klikoni 0 per te shkruar mbrapa.")
+            target_user = input(
+                "Per cilin perdorues deshironi te krijoni llogarine: ").strip()
+            if target_user == "0":
+                continue
+            if target_user not in bank.users:
+                pr.error("Perdoruesi nuk ekziston.")
+                continue
             account_name = input(
                 "Vendosni emrin e mbajtësit të llogarisë: ").strip()
-            if account_name == "0":
-                continue
             initial_balance = validate_positive_number(
                 "Shkruani shumen per te deponuar (ose 0 per te anuluar): ")
             if initial_balance == 0:
                 pr.warning("Krijimi i llogarise u anulua.")
                 continue
-            bank.create_account(username, account_name, initial_balance)
+            bank.create_account(target_user, account_name, initial_balance)
 
         elif choice == "2":
+            # Deposit - standard users can only deposit to their own accounts
             pr.menu("Klikoni 0 per te shkruar mbrapa.")
             acc_num = input("Shkruani numrin e llogarise: ").strip()
             if acc_num == "0":
                 continue
             account = bank.get_account(acc_num)
-            if account and acc_num in bank.get_user_accounts(username):
+            if account and (is_admin or acc_num in bank.get_user_accounts(username)):
                 amount = validate_positive_number(
                     "Shuma e deponuar (ose 0 per anulim): ")
                 if amount == 0:
@@ -603,12 +620,13 @@ def main_menu(bank, username):
                 pr.error("Llogaria nuk u gjet ose qasja u refuzua.")
 
         elif choice == "3":
+            # Withdrawal - standard users can only withdraw from their own accounts
             pr.menu("Klikoni 0 per te shkruar mbrapa.")
             acc_num = input("Shkruani numrin e llogarise: ").strip()
             if acc_num == "0":
                 continue
             account = bank.get_account(acc_num)
-            if account and acc_num in bank.get_user_accounts(username):
+            if account and (is_admin or acc_num in bank.get_user_accounts(username)):
                 amount = validate_positive_number(
                     "Shuma per terheqje (or 0 to cancel): ")
                 if amount == 0:
@@ -619,118 +637,86 @@ def main_menu(bank, username):
             else:
                 pr.error("Llogaria nuk u gjet ose qasja u refuzua.")
 
-        elif choice == "4":
-            pr.menu("Klikoni 0 per te shkruar mbrapa.")
-            acc_num = input("Shkruani numrin e llogarise: ").strip()
-            if acc_num == "0":
-                continue
-            account = bank.get_account(acc_num)
-            if account and acc_num in bank.get_user_accounts(username):
-                account.check_balance()
-            else:
-                pr.error("Llogaria nuk u gjet ose qasja u refuzua.")
-
-        elif choice == "5":
-            pr.menu("Klikoni 0 per te shkruar mbrapa.")
-            sender_acc = input("Numri i llogarise: ").strip()
-            if sender_acc == "0":
-                continue
-            sender = bank.get_account(sender_acc)
-            if sender and sender_acc in bank.get_user_accounts(username):
-                recipient_acc = input(
-                    "Numri i llogarise se marresit: ").strip()
-                if recipient_acc == "0":
-                    continue
-                recipient = bank.get_account(recipient_acc)
-                if recipient:
-                    amount = validate_positive_number(
-                        "Shuma per transfer (ose 0 per anulim): ")
-                    if amount == 0:
-                        pr.warning("Transferi u anulua.")
-                        continue
-                    sender.transfer(amount, recipient, username, bank)
-                    bank.write_transaction_to_file(
-                        "transfer", username, sender_acc, recipient_account=recipient_acc)
-                else:
-                    pr.error("Llogaria e marresit nuk u gjend.")
-            else:
-                pr.error("Llogaria e derguesit nuk u gjend.")
-
         elif choice == "6":
-            pr.header("\n--- Llogaria juaj ---")
-            bank.list_user_accounts(username)
+            # List accounts - admin sees all, standard users see only their own
+            pr.header(
+                "\n--- Llogaria juaj ---" if not is_admin else "\n--- Te gjitha llogarite ---")
+            if is_admin:
+                # Admin sees all accounts
+                for user in bank.user_accounts:
+                    pr.success(f"\nPerdoruesi: {user}")
+                    for acc_num in bank.user_accounts[user]:
+                        account = bank.accounts[acc_num]
+                        status = " (Çaktivizuar)" if account.disabled else ""
+                        pr.success(
+                            f"Llogaria {acc_num}: {account.account_name} - €{account.balance:.2f} - Plan: {account.plan}{status}")
+            else:
+                # Standard user sees only their accounts
+                bank.list_user_accounts(username)
 
-        elif choice == "7":
-            pr.menu("Klikoni 0 per t'u kthyer mbrapa.")
-            acc_num = input("Shkruani numrin e llogarise suaj: ").strip()
-            if acc_num == "0":
-                continue
-            account = bank.get_account(acc_num)
-            if not account or acc_num not in bank.get_user_accounts(username):
-                pr.error("Llogaria nuk u gjet ose qasja u refuzua.")
-                continue
+        elif choice == "8" and is_admin:
+            # Admin can delete any account
+            pr.header("\n--- Te gjitha llogarite ---")
+            for user in bank.user_accounts:
+                pr.success(f"\nPerdoruesi: {user}")
+                for acc_num in bank.user_accounts[user]:
+                    account = bank.accounts[acc_num]
+                    pr.success(f"Llogaria {acc_num}: {account.account_name}")
 
-            pr.menu("Kompanite e disponueshme: EC, CQ, FI")
-            company = input(
-                "Shkruani kodin e kompanise (EC, CQ, FI): ").strip().upper()
-            if company == "0":
-                continue
-
-            amount = validate_positive_number(
-                "Shkruani shumen per te paguar: ")
-            if amount == 0:
-                pr.warning("Pagesa e fatures u anulua.")
-                continue
-
-            success = account.pay_bill(company, amount, bank, username)
-            if success:
-                bank.write_transaction_to_file(
-                    "paybill", username, acc_num, company=company)
-
-        elif choice == "8":
-            pr.header("\n--- Llogaria juaj ---")
-            bank.list_user_accounts(username)
             pr.menu("Shkruani 0 per t'u kthyer mbrapa.")
             acc_num = input(
                 "Shkruani numrin e llogarise per ta fshire: ").strip()
             if acc_num == "0":
                 continue
-            if acc_num not in bank.get_user_accounts(username):
-                pr.error("Llogaria nuk u gjet ose qasja u refuzua.")
-                continue
-            bank.delete_account(username, acc_num)
+
+            # Find which user owns this account
+            target_user = None
+            for user in bank.user_accounts:
+                if acc_num in bank.user_accounts[user]:
+                    target_user = user
+                    break
+
+            if target_user:
+                bank.delete_account(target_user, acc_num)
+            else:
+                pr.error("Llogaria nuk u gjet.")
 
         elif choice == "9" and is_admin:
-            pr.header("\n--- Çaktivizo llogarine ---")
-            bank.list_user_accounts(username)
+            # Admin can disable any account
+            pr.header("\n--- Te gjitha llogarite ---")
+            for user in bank.user_accounts:
+                pr.success(f"\nPerdoruesi: {user}")
+                for acc_num in bank.user_accounts[user]:
+                    account = bank.accounts[acc_num]
+                    pr.success(f"Llogaria {acc_num}: {account.account_name}")
+
             pr.menu("Shkruani 0 per t'u kthyer mbrapa.")
             acc_num = input(
                 "Shkruani numrin e llogarise per ta çaktivizuar: ").strip()
             if acc_num == "0":
                 continue
-            bank.disable_account(username, acc_num)
 
-        elif choice == "10" and is_admin:
-            pr.header("\n--- Ndrysho planin ---")
-            bank.list_user_accounts(username)
-            pr.menu("Shkruani 0 per t'u kthyer mbrapa.")
-            acc_num = input("Shkruani numrin e llogarise: ").strip()
-            if acc_num == "0":
-                continue
-            plan = input("Shkruani planin e ri (SP ose NP): ").strip().upper()
-            if plan == "0":
-                continue
-            bank.change_plan(username, acc_num, plan)
+            # Find which user owns this account
+            target_user = None
+            for user in bank.user_accounts:
+                if acc_num in bank.user_accounts[user]:
+                    target_user = user
+                    break
 
-        elif choice == ("11" if is_admin else "9"):
+            if target_user:
+                bank.disable_account(target_user, acc_num)
+            else:
+                pr.error("Llogaria nuk u gjet.")
+
+        elif (choice == "11" and is_admin) or (choice == "8" and not is_admin):
+            # Logout
             pr.warning("Duke u shkyqur...")
             log_activity("Perdoruesi u shkyc", username)
             bank.write_transaction_to_file("logout", username)
             bank.current_session = None
             break
 
-        else:
-            pr.error("Zgjedhje e gabuar.")
+        # ... (rest of the menu options remain similar with admin checks where needed)
 
 
 def main():

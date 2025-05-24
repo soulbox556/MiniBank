@@ -19,7 +19,7 @@
                 "account_name": "Testtt",
                 "balance": 100.0,
                 "disabled": false,
-                "plan": "SP"
+                "plan": "NP"
             }
         ],
         "transfers": [
@@ -99,6 +99,79 @@
     "Fatmir": {
         "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
         "accounts": [],
+        "transfers": [],
+        "bills": []
+    },
+    "Hasan": {
+        "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "accounts": [
+            {
+                "account_number": "05HASANXXXXXXXXXXXXXXX100020012330005",
+                "account_name": "Hasan",
+                "balance": 1233.0,
+                "disabled": false,
+                "plan": "SP"
+            }
+        ],
+        "transfers": [],
+        "bills": []
+    },
+    "Ertan ILIYAZ": {
+        "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "accounts": [],
+        "transfers": [],
+        "bills": []
+    },
+    "Lendrit Berisha": {
+        "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "accounts": [],
+        "transfers": [],
+        "bills": []
+    },
+    "Majlind Avdylaj": {
+        "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "accounts": [],
+        "transfers": [],
+        "bills": []
+    },
+    "Fatmir Hasani": {
+        "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "accounts": [],
+        "transfers": [],
+        "bills": []
+    },
+    "admin222": {
+        "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "accounts": [
+            {
+                "account_number": "05LENDRITTXXXXXXXXXXXX100030001230005",
+                "account_name": "Lendritt",
+                "balance": 123.0,
+                "disabled": false,
+                "plan": "SP"
+            },
+            {
+                "account_number": "05LENDRITTTXXXXXXXXXXX100040123450005",
+                "account_name": "lendrittt",
+                "balance": 12345.0,
+                "disabled": false,
+                "plan": "SP"
+            }
+        ],
+        "transfers": [],
+        "bills": []
+    },
+    "aab": {
+        "password": "38760eabb666e8e61ee628a17c4090cc50728e095ff24218119d51bd22475363",
+        "accounts": [
+            {
+                "account_number": "05AABXXXXXXXXXXXXXXXXX100070001000005",
+                "account_name": "aab",
+                "balance": 100.0,
+                "disabled": false,
+                "plan": "SP"
+            }
+        ],
         "transfers": [],
         "bills": []
     }

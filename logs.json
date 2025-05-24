@@ -2086,5 +2086,545 @@
         "username": "Testtt",
         "action": "Deposit",
         "details": "Account: 05TESTTTXXXXXXXXXXXXXX100000001000005, Amount: 400.0"
+    },
+    {
+        "timestamp": "2025-05-24T11:42:24.583009",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:42:54.391341",
+        "username": "Hasan",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:43:58.489117",
+        "username": "Hasan",
+        "action": "Account created",
+        "details": "Account Number: 05HASANXXXXXXXXXXXXXXX100010002000005, Initial Balance: 200.0"
+    },
+    {
+        "timestamp": "2025-05-24T11:44:15.508848",
+        "username": "Hasan",
+        "action": "Account deleted",
+        "details": "Account Number: 05HASANXXXXXXXXXXXXXXX100010002000005"
+    },
+    {
+        "timestamp": "2025-05-24T11:44:56.923891",
+        "username": "Hasan",
+        "action": "Account created",
+        "details": "Account Number: 05HASANXXXXXXXXXXXXXXX100020012330005, Initial Balance: 1233.0"
+    },
+    {
+        "timestamp": "2025-05-24T11:45:05.898809",
+        "username": "Hasan",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:45:09.181019",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:45:41.507408",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:45:44.667959",
+        "username": "testt",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:47:08.692051",
+        "username": "testt",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:47:10.919264",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:49:09.940463",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:49:39.877028",
+        "username": "Ertan ILIYAZ",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:49:50.305627",
+        "username": "Ertan ILIYAZ",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:50:12.324977",
+        "username": "Lendrit Berisha",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:50:17.269001",
+        "username": "Lendrit Berisha",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:50:34.567985",
+        "username": "Majlind Avdylaj",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:50:36.553604",
+        "username": "Majlind Avdylaj",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:50:42.350984",
+        "username": "Fatmir Hasani",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:50:46.766202",
+        "username": "Fatmir Hasani",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:50:50.136885",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:51:08.366342",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:51:13.349976",
+        "username": "Ertan ILIYAZ",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:51:49.663965",
+        "username": "Ertan ILIYAZ",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:51:53.924514",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:53:45.135743",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:54:02.112171",
+        "username": "testt",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:54:41.755403",
+        "username": "testt",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:54:47.182027",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:55:06.319938",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:58:28.189090",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:58:53.702148",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T11:59:18.328120",
+        "username": "testt",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:00:00.602338",
+        "username": "testt",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:00:24.924252",
+        "username": "admin222",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:01:46.597986",
+        "username": "admin222",
+        "action": "Account created",
+        "details": "Account Number: 05LENDRITTXXXXXXXXXXXX100030001230005, Initial Balance: 123.0"
+    },
+    {
+        "timestamp": "2025-05-24T12:02:10.540704",
+        "username": "admin222",
+        "action": "Account created",
+        "details": "Account Number: 05LENDRITTTXXXXXXXXXXX100040123450005, Initial Balance: 12345.0"
+    },
+    {
+        "timestamp": "2025-05-24T12:04:27.214569",
+        "username": "admin222",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:04:32.635690",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:05:17.999927",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:10:08.747723",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:10:17.235896",
+        "username": "admin",
+        "action": "Account created",
+        "details": "Account Number: 05AABXXXXXXXXXXXXXXXXX100050001000005, Initial Balance: 100.0"
+    },
+    {
+        "timestamp": "2025-05-24T12:10:22.478343",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:10:52.509112",
+        "username": "aab",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:16:30.327702",
+        "username": "aab",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:16:36.432874",
+        "username": "aab",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:17:04.852487",
+        "username": "aab",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:17:08.102301",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:17:41.243388",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:17:45.910116",
+        "username": "aab",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:17:58.946148",
+        "username": "aab",
+        "action": "Account created",
+        "details": "Account Number: 05AABXXXXXXXXXXXXXXXXX100060002000005, Initial Balance: 200.0"
+    },
+    {
+        "timestamp": "2025-05-24T12:18:09.886599",
+        "username": "aab",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:18:16.718672",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:18:25.332025",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:18:35.693783",
+        "username": "aab",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:19:51.279459",
+        "username": "aab",
+        "action": "Account deleted",
+        "details": "Account Number: 05AABXXXXXXXXXXXXXXXXX100060002000005"
+    },
+    {
+        "timestamp": "2025-05-24T12:20:17.314435",
+        "username": "aab",
+        "action": "Account created",
+        "details": "Account Number: 05AABXXXXXXXXXXXXXXXXX100070001000005, Initial Balance: 100.0"
+    },
+    {
+        "timestamp": "2025-05-24T12:20:27.482654",
+        "username": "aab",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:20:30.212197",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:20:56.361908",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:21:04.987199",
+        "username": "SYSTEM",
+        "action": "Application exit",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:21:38.645548",
+        "username": "aab",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:22:58.690121",
+        "username": "aab",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:23:11.932506",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:26:29.666401",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:26:32.548723",
+        "username": "SYSTEM",
+        "action": "Application exit",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:27:49.162173",
+        "username": "aab",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:31:30.088467",
+        "username": "aab",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:31:31.645736",
+        "username": "SYSTEM",
+        "action": "Application exit",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:32:21.832209",
+        "username": "aab",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:32:25.899628",
+        "username": "aab",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:32:38.621383",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:32:40.891960",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:32:44.575979",
+        "username": "aab",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:33:16.528486",
+        "username": "aab",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:33:20.040728",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:38:27.612048",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:39:49.614770",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:40:04.150661",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:40:14.682712",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:40:23.729455",
+        "username": "admin",
+        "action": "Account deleted",
+        "details": "Account Number: 05AABXXXXXXXXXXXXXXXXX100050001000005"
+    },
+    {
+        "timestamp": "2025-05-24T12:40:30.338486",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:40:39.879310",
+        "username": "aab",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:42:43.598265",
+        "username": "aab",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:45:58.690787",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:46:08.816392",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:46:15.744675",
+        "username": "aab",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:46:20.762372",
+        "username": "aab",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:48:46.958323",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-24T12:50:31.715780",
+        "username": "admin",
+        "action": "Plan changed",
+        "details": "Account: 05TESTTTXXXXXXXXXXXXXX100000001000005, New Plan: NP"
     }
 ]
