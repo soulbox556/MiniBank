@@ -28,6 +28,12 @@
                 "to": "05_LINDI________________10000_00012300_05",
                 "amount": 200.0,
                 "timestamp": "2025-05-14T10:05:02.835870"
+            },
+            {
+                "from": "05TESTTTXXXXXXXXXXXXXX100000001000005",
+                "to": "05TESTTTXXXXXXXXXXXXXX100000001000005",
+                "amount": 200.0,
+                "timestamp": "2025-05-30T09:56:15.044688"
             }
         ],
         "bills": [
@@ -54,6 +60,12 @@
                 "company": "Fast Internet, Inc. (FI)",
                 "amount": 30.0,
                 "timestamp": "2025-05-14T15:42:56.746720"
+            },
+            {
+                "from": "05TESTTTXXXXXXXXXXXXXX100000001000005",
+                "company": "The Bright Light Electric Company (EC)",
+                "amount": 100.0,
+                "timestamp": "2025-05-30T09:56:46.471573"
             }
         ]
     },
@@ -64,6 +76,13 @@
                 "account_number": "05_TEST_________________10000_01000000_05",
                 "account_name": "test",
                 "balance": 10000.0
+            },
+            {
+                "account_number": "05MAJIIIXXXXXXXXXXXXXX100000003000005",
+                "account_name": "majiii",
+                "balance": 300.0,
+                "disabled": false,
+                "plan": "SP"
             }
         ],
         "transfers": []
@@ -80,9 +99,31 @@
                 "account_number": "05_BURIM________________10000_02000000_05",
                 "account_name": "Burim",
                 "balance": 20000.0
+            },
+            {
+                "account_number": "05YYTTXXXXXXXXXXXXXXXX100000004000005",
+                "account_name": "yytt",
+                "balance": 400.0,
+                "disabled": false,
+                "plan": "SP"
             }
         ],
-        "transfers": []
+        "transfers": [
+            {
+                "from": "05YYTTXXXXXXXXXXXXXXXX100000004000005",
+                "to": "05YYTTXXXXXXXXXXXXXXXX100000004000005",
+                "amount": 600.0,
+                "timestamp": "2025-05-30T09:58:25.723120"
+            }
+        ],
+        "bills": [
+            {
+                "from": "05YYTTXXXXXXXXXXXXXXXX100000004000005",
+                "company": "Credit Card Company Q (CQ)",
+                "amount": 50.0,
+                "timestamp": "2025-05-30T09:59:01.808465"
+            }
+        ]
     },
     "Majlind": {
         "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
@@ -172,6 +213,12 @@
                 "plan": "SP"
             }
         ],
+        "transfers": [],
+        "bills": []
+    },
+    "uuyy": {
+        "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "accounts": [],
         "transfers": [],
         "bills": []
     }

@@ -2626,5 +2626,341 @@
         "username": "admin",
         "action": "Plan changed",
         "details": "Account: 05TESTTTXXXXXXXXXXXXXX100000001000005, New Plan: NP"
+    },
+    {
+        "timestamp": "2025-05-30T09:15:16.884006",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:16:05.306365",
+        "username": "admin",
+        "action": "Account disabled",
+        "details": "Account: 05_LINDI________________10000_00050000_05"
+    },
+    {
+        "timestamp": "2025-05-30T09:16:54.032628",
+        "username": "testuser",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:16:54.038690",
+        "username": "testuser",
+        "action": "Account created",
+        "details": "Account Number: 05PRIMARYXXXXXXXXXXXXX100000001000005, Initial Balance: 100"
+    },
+    {
+        "timestamp": "2025-05-30T09:16:54.053577",
+        "username": "deposituser",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:16:54.060481",
+        "username": "deposituser",
+        "action": "Account created",
+        "details": "Account Number: 05SAVINGSXXXXXXXXXXXXX100000001000005, Initial Balance: 100"
+    },
+    {
+        "timestamp": "2025-05-30T09:16:54.068159",
+        "username": "Savings",
+        "action": "Deposit",
+        "details": "Account: 05SAVINGSXXXXXXXXXXXXX100000001000005, Amount: 50"
+    },
+    {
+        "timestamp": "2025-05-30T09:16:54.123977",
+        "username": "alice",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:16:54.136772",
+        "username": "bob",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:16:54.152798",
+        "username": "alice",
+        "action": "Account created",
+        "details": "Account Number: 05WALLETXXXXXXXXXXXXXX100000003000005, Initial Balance: 300"
+    },
+    {
+        "timestamp": "2025-05-30T09:16:54.164684",
+        "username": "bob",
+        "action": "Account created",
+        "details": "Account Number: 05WALLETXXXXXXXXXXXXXX100010001000005, Initial Balance: 100"
+    },
+    {
+        "timestamp": "2025-05-30T09:16:54.174993",
+        "username": "Wallet",
+        "action": "Transfer",
+        "details": "From: 05WALLETXXXXXXXXXXXXXX100000003000005, To: 05WALLETXXXXXXXXXXXXXX100010001000005, Amount: 100"
+    },
+    {
+        "timestamp": "2025-05-30T09:17:26.019102",
+        "username": "lindi",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:19:07.719000",
+        "username": "lindi",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:19:16.820110",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:23:35.672945",
+        "username": "lindi",
+        "action": "Account created",
+        "details": "Account Number: 05MAJIIIXXXXXXXXXXXXXX100000003000005, Initial Balance: 300.0"
+    },
+    {
+        "timestamp": "2025-05-30T09:24:00.304052",
+        "username": "majiii",
+        "action": "Deposit",
+        "details": "Account: 05MAJIIIXXXXXXXXXXXXXX100000003000005, Amount: 500.0"
+    },
+    {
+        "timestamp": "2025-05-30T09:24:15.211135",
+        "username": "majiii",
+        "action": "Withdraw",
+        "details": "Account: 05MAJIIIXXXXXXXXXXXXXX100000003000005, Amount: 100.0"
+    },
+    {
+        "timestamp": "2025-05-30T09:25:25.632923",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:27:20.871317",
+        "username": "test",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:27:55.913760",
+        "username": "Burim",
+        "action": "Deposit",
+        "details": "Account: 05_BURIM________________10000_02000000_05, Amount: 400.0"
+    },
+    {
+        "timestamp": "2025-05-30T09:28:17.942543",
+        "username": "Burim",
+        "action": "Withdraw",
+        "details": "Account: 05_BURIM________________10000_02000000_05, Amount: 100.0"
+    },
+    {
+        "timestamp": "2025-05-30T09:31:25.285259",
+        "username": "test",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:31:47.235182",
+        "username": "aab",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:40:14.122127",
+        "username": "aab",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:40:22.007222",
+        "username": "SYSTEM",
+        "action": "Application exit",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:40:46.723024",
+        "username": "uuyy",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:41:25.511475",
+        "username": "uuyy",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:41:34.927521",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:42:38.335974",
+        "username": "testuser",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:42:38.340373",
+        "username": "testuser",
+        "action": "Account created",
+        "details": "Account Number: 05PRIMARYXXXXXXXXXXXXX100000001000005, Initial Balance: 100"
+    },
+    {
+        "timestamp": "2025-05-30T09:42:38.352543",
+        "username": "deposituser",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:42:38.359647",
+        "username": "deposituser",
+        "action": "Account created",
+        "details": "Account Number: 05SAVINGSXXXXXXXXXXXXX100000001000005, Initial Balance: 100"
+    },
+    {
+        "timestamp": "2025-05-30T09:42:38.366524",
+        "username": "Savings",
+        "action": "Deposit",
+        "details": "Account: 05SAVINGSXXXXXXXXXXXXX100000001000005, Amount: 50"
+    },
+    {
+        "timestamp": "2025-05-30T09:42:38.377552",
+        "username": "alice",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:42:38.385478",
+        "username": "bob",
+        "action": "User registered",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:42:38.393021",
+        "username": "alice",
+        "action": "Account created",
+        "details": "Account Number: 05WALLETXXXXXXXXXXXXXX100000003000005, Initial Balance: 300"
+    },
+    {
+        "timestamp": "2025-05-30T09:42:38.401365",
+        "username": "bob",
+        "action": "Account created",
+        "details": "Account Number: 05WALLETXXXXXXXXXXXXXX100010001000005, Initial Balance: 100"
+    },
+    {
+        "timestamp": "2025-05-30T09:42:38.408520",
+        "username": "Wallet",
+        "action": "Transfer",
+        "details": "From: 05WALLETXXXXXXXXXXXXXX100000003000005, To: 05WALLETXXXXXXXXXXXXXX100010001000005, Amount: 100"
+    },
+    {
+        "timestamp": "2025-05-30T09:44:43.157811",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:50:20.094146",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:54:04.709505",
+        "username": "admin",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:54:44.951499",
+        "username": "test",
+        "action": "Account created",
+        "details": "Account Number: 05YYTTXXXXXXXXXXXXXXXX100000004000005, Initial Balance: 400.0"
+    },
+    {
+        "timestamp": "2025-05-30T09:54:54.163214",
+        "username": "Testtt",
+        "action": "Deposit",
+        "details": "Account: 05TESTTTXXXXXXXXXXXXXX100000001000005, Amount: 500.0"
+    },
+    {
+        "timestamp": "2025-05-30T09:55:23.616699",
+        "username": "Testtt",
+        "action": "Deposit",
+        "details": "Account: 05TESTTTXXXXXXXXXXXXXX100000001000005, Amount: 2000.0"
+    },
+    {
+        "timestamp": "2025-05-30T09:55:49.660655",
+        "username": "Testtt",
+        "action": "Withdraw",
+        "details": "Account: 05TESTTTXXXXXXXXXXXXXX100000001000005, Amount: 450.0"
+    },
+    {
+        "timestamp": "2025-05-30T09:56:15.040060",
+        "username": "Testtt",
+        "action": "Transfer",
+        "details": "From: 05TESTTTXXXXXXXXXXXXXX100000001000005, To: 05TESTTTXXXXXXXXXXXXXX100000001000005, Amount: 200.0"
+    },
+    {
+        "timestamp": "2025-05-30T09:56:46.471630",
+        "username": "admin",
+        "action": "Bill Payment",
+        "details": "Paid 100.00 to The Bright Light Electric Company (EC) from account 05TESTTTXXXXXXXXXXXXXX100000001000005"
+    },
+    {
+        "timestamp": "2025-05-30T09:57:19.178160",
+        "username": "admin",
+        "action": "Plan changed",
+        "details": "Account: 05TESTTTXXXXXXXXXXXXXX100000001000005, New Plan: NP"
+    },
+    {
+        "timestamp": "2025-05-30T09:57:25.915090",
+        "username": "admin",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:57:32.618968",
+        "username": "test",
+        "action": "User login",
+        "details": ""
+    },
+    {
+        "timestamp": "2025-05-30T09:57:54.692285",
+        "username": "yytt",
+        "action": "Deposit",
+        "details": "Account: 05YYTTXXXXXXXXXXXXXXXX100000004000005, Amount: 500.0"
+    },
+    {
+        "timestamp": "2025-05-30T09:58:07.763847",
+        "username": "yytt",
+        "action": "Withdraw",
+        "details": "Account: 05YYTTXXXXXXXXXXXXXXXX100000004000005, Amount: 100.0"
+    },
+    {
+        "timestamp": "2025-05-30T09:58:25.718673",
+        "username": "yytt",
+        "action": "Transfer",
+        "details": "From: 05YYTTXXXXXXXXXXXXXXXX100000004000005, To: 05YYTTXXXXXXXXXXXXXXXX100000004000005, Amount: 600.0"
+    },
+    {
+        "timestamp": "2025-05-30T09:59:01.808519",
+        "username": "test",
+        "action": "Bill Payment",
+        "details": "Paid 50.00 to Credit Card Company Q (CQ) from account 05YYTTXXXXXXXXXXXXXXXX100000004000005"
+    },
+    {
+        "timestamp": "2025-05-30T09:59:05.353457",
+        "username": "test",
+        "action": "Perdoruesi u shkyc",
+        "details": ""
     }
 ]

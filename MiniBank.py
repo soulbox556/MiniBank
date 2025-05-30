@@ -637,6 +637,45 @@ def main_menu(bank, username):
             else:
                 pr.error("Llogaria nuk u gjet ose qasja u refuzua.")
 
+        elif choice == "4":
+            # Check balance
+            pr.menu("Klikoni 0 per te shkruar mbrapa.")
+            acc_num = input("Shkruani numrin e llogarise: ").strip()
+            if acc_num == "0":
+                continue
+            account = bank.get_account(acc_num)
+            if account and (is_admin or acc_num in bank.get_user_accounts(username)):
+                account.check_balance()
+            else:
+                pr.error("Llogaria nuk u gjet ose qasja u refuzua.")
+
+        elif choice == "5":
+            # Transfer funds
+            pr.menu("Klikoni 0 per te shkruar mbrapa.")
+            from_acc_num = input("Shkruani numrin e llogarise nga e cila do te transferoni: ").strip()
+            if from_acc_num == "0":
+                continue
+            
+            # Check if user has access to the source account
+            from_account = bank.get_account(from_acc_num)
+            if not from_account or (not is_admin and from_acc_num not in bank.get_user_accounts(username)):
+                pr.error("Llogaria buruese nuk u gjet ose qasja u refuzua.")
+                continue
+            
+            to_acc_num = input("Shkruani numrin e llogarise se marresit: ").strip()
+            to_account = bank.get_account(to_acc_num)
+            if not to_account:
+                pr.error("Llogaria e marresit nuk u gjet.")
+                continue
+            
+            amount = validate_positive_number("Shuma per transferim (ose 0 per anulim): ")
+            if amount == 0:
+                pr.warning("Transferimi u anulua.")
+                continue
+            
+            from_account.transfer(amount, to_account, username, bank)
+            bank.write_transaction_to_file("transfer", username, from_acc_num, recipient_account=to_acc_num)
+
         elif choice == "6":
             # List accounts - admin sees all, standard users see only their own
             pr.header(
@@ -653,6 +692,33 @@ def main_menu(bank, username):
             else:
                 # Standard user sees only their accounts
                 bank.list_user_accounts(username)
+
+        elif choice == "7":
+            # Pay bill
+            pr.menu("Klikoni 0 per te shkruar mbrapa.")
+            acc_num = input("Shkruani numrin e llogarise: ").strip()
+            if acc_num == "0":
+                continue
+            
+            # Check if user has access to the account
+            account = bank.get_account(acc_num)
+            if not account or (not is_admin and acc_num not in bank.get_user_accounts(username)):
+                pr.error("Llogaria nuk u gjet ose qasja u refuzua.")
+                continue
+            
+            pr.menu("Kompanite e disponueshme:")
+            pr.menu("EC - The Bright Light Electric Company")
+            pr.menu("CQ - Credit Card Company Q")
+            pr.menu("FI - Fast Internet, Inc.")
+            company = input("Shkruani kodin e kompanise (EC, CQ, FI): ").strip().upper()
+            
+            amount = validate_positive_number("Shuma per te paguar (ose 0 per anulim): ")
+            if amount == 0:
+                pr.warning("Pagesa u anulua.")
+                continue
+            
+            account.pay_bill(company, amount, bank, username)
+            bank.write_transaction_to_file("paybill", username, acc_num, company=company)
 
         elif choice == "8" and is_admin:
             # Admin can delete any account
@@ -708,6 +774,36 @@ def main_menu(bank, username):
             else:
                 pr.error("Llogaria nuk u gjet.")
 
+        elif choice == "10" and is_admin:
+            # Change plan (admin only)
+            pr.header("\n--- Ndrysho planin e llogarise ---")
+            pr.menu("Shkruani 0 per t'u kthyer mbrapa.")
+            acc_num = input("Shkruani numrin e llogarise: ").strip()
+            if acc_num == "0":
+                continue
+            
+            # Find which user owns this account
+            target_user = None
+            for user in bank.user_accounts:
+                if acc_num in bank.user_accounts[user]:
+                    target_user = user
+                    break
+            
+            if not target_user:
+                pr.error("Llogaria nuk u gjet.")
+                continue
+            
+            pr.menu("Planet e disponueshme:")
+            pr.menu("SP - Student Plan")
+            pr.menu("NP - Normal Plan")
+            new_plan = input("Shkruani planin e ri (SP, NP): ").strip().upper()
+            
+            if new_plan not in ["SP", "NP"]:
+                pr.error("Plan i pavlefshem. Duhet te jete SP ose NP.")
+                continue
+            
+            bank.change_plan(target_user, acc_num, new_plan)
+
         elif (choice == "11" and is_admin) or (choice == "8" and not is_admin):
             # Logout
             pr.warning("Duke u shkyqur...")
@@ -715,8 +811,6 @@ def main_menu(bank, username):
             bank.write_transaction_to_file("logout", username)
             bank.current_session = None
             break
-
-        # ... (rest of the menu options remain similar with admin checks where needed)
 
 
 def main():
